@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-strength: var(--strength);
+  --color-strength-foreground: var(--strength-foreground);
+  --color-running: var(--running);
+  --color-running-foreground: var(--running-foreground);
+  --color-recovery: var(--recovery);
+  --color-recovery-foreground: var(--recovery-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* Atletic dark — único tema. Se fuerza .dark en <html> */
+:root,
+.dark {
+  --background: oklch(0.13 0 0);                /* #0a0a0a-ish negro */
+  --foreground: oklch(0.985 0 0);               /* casi blanco */
+
+  --card: oklch(0.17 0 0);                      /* gris oscuro elevado */
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.17 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  /* Primary = lima fuerza (CTA principal) */
+  --primary: oklch(0.94 0.24 122);              /* #d4ff00 */
+  --primary-foreground: oklch(0.13 0 0);
+
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+
+  --accent: oklch(0.22 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.62 0.22 25);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.94 0.24 122 / 60%);
+
+  /* Acentos por categoría de entrenamiento */
+  --strength: oklch(0.94 0.24 122);             /* lima  #d4ff00 */
+  --strength-foreground: oklch(0.13 0 0);
+  --running: oklch(0.68 0.21 35);               /* naranja #ff5722 */
+  --running-foreground: oklch(0.985 0 0);
+  --recovery: oklch(0.62 0.20 254);             /* azul #3b82f6 */
+  --recovery-foreground: oklch(0.985 0 0);
+
+  --chart-1: oklch(0.94 0.24 122);              /* lima */
+  --chart-2: oklch(0.68 0.21 35);               /* naranja */
+  --chart-3: oklch(0.62 0.20 254);              /* azul */
+  --chart-4: oklch(0.78 0.15 80);               /* dorado para PRs */
+  --chart-5: oklch(0.55 0.16 300);              /* violeta para misc */
+
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* Mobile-first: nunca scroll horizontal */
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+  /* Números monoespaciados con tabulares para columnas alineadas */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
