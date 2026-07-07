@@ -1,38 +1,39 @@
 <style>
   /* ============================================================
-     "CONVOCATORIA OFICIAL — Christian cumple 60"
-     Mundo visual único: afiche de estadio de noche, celeste y
-     blanco (Racing / Scaloneta). Diseño deliberadamente en un
-     solo tema (noche de estadio), como un afiche de matchday.
+     CHRISTIAN · 60 AÑOS — Invitación estilo Racing Club
+     Celeste y blanco, camiseta, escudo, papelitos de recibimiento.
+     Mundo visual único (noche en el Cilindro). Tema fijo.
      ============================================================ */
 
   :root {
-    --navy:        #071320;
-    --navy-2:      #0d2336;
-    --navy-3:      #123049;
-    --celeste:     #6fb7ea;
-    --celeste-hi:  #a6d8ff;
-    --gold:        #f2c14e;
-    --gold-deep:   #d69b25;
-    --ink:         #eaf4fb;
-    --muted:       #8fb0c6;
-    --grass:       #46b473;
-    --line:        rgba(166,216,255,.16);
-    --maxw: 620px;
+    --navy:       #071626;
+    --navy-2:     #0c243a;
+    --navy-3:     #12314c;
+    --celeste:    #63b3e4;
+    --celeste-hi: #aadcff;
+    --white:      #f4fbff;
+    --gold:       #ecc25a;
+    --grass:      #3f9c62;
+    --ink:        #e9f4fc;
+    --muted:      #8fb1c8;
+    --line:       rgba(170,220,255,.16);
+    --stripe:     rgba(170,220,255,.05);
+    --maxw: 600px;
 
-    --f-display: 'Arial Narrow', 'Roboto Condensed', 'Helvetica Neue', system-ui, sans-serif;
-    --f-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --f-display: 'Arial Narrow','Roboto Condensed','Oswald','Helvetica Neue',system-ui,sans-serif;
+    --f-body: system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
 
   * { box-sizing: border-box; }
-
   body { margin: 0; }
 
   .stage {
+    /* franjas verticales celeste/blanco muy sutiles = camiseta de Racing */
     background:
-      radial-gradient(120% 80% at 50% -10%, rgba(111,183,234,.22), transparent 60%),
-      radial-gradient(100% 60% at 50% 120%, rgba(70,180,115,.10), transparent 55%),
-      linear-gradient(180deg, var(--navy) 0%, #050d16 100%);
+      radial-gradient(120% 70% at 50% -8%, rgba(99,179,228,.20), transparent 55%),
+      repeating-linear-gradient(90deg,
+        transparent 0 26px, var(--stripe) 26px 52px),
+      linear-gradient(180deg, var(--navy) 0%, #04101d 100%);
     color: var(--ink);
     font-family: var(--f-body);
     -webkit-font-smoothing: antialiased;
@@ -41,317 +42,251 @@
     overflow-x: hidden;
   }
 
-  .wrap {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 22px;
-    position: relative;
-  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; position: relative; }
 
-  /* ---------- utility type ---------- */
   .eyebrow {
-    font-family: var(--f-display);
-    text-transform: uppercase;
-    letter-spacing: .28em;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--celeste);
-    margin: 0;
+    font-family: var(--f-display); text-transform: uppercase;
+    letter-spacing: .3em; font-size: 12.5px; font-weight: 700;
+    color: var(--celeste); margin: 0;
   }
   .eyebrow.gold { color: var(--gold); }
+  h1,h2,h3 { font-family: var(--f-display); text-transform: uppercase; margin: 0; }
 
-  h1, h2, h3 { font-family: var(--f-display); text-transform: uppercase; margin: 0; }
-
-  /* ============ HERO ============ */
-  .hero {
-    position: relative;
-    padding: 72px 0 54px;
-    text-align: center;
-    overflow: hidden;
-  }
-  #fx {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    z-index: 0; pointer-events: none;
-  }
-  .hero .wrap { z-index: 1; }
-
+  /* ===== CRESTA / ESCUDO ===== */
   .crest {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 7px 16px;
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    background: rgba(13,35,54,.5);
-    backdrop-filter: blur(4px);
-    margin-bottom: 30px;
+    display:inline-flex; align-items:center; gap:11px;
+    padding:7px 15px; border:1px solid var(--line); border-radius:100px;
+    background: rgba(12,36,58,.55);
   }
-  .crest .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--celeste); box-shadow: 0 0 12px var(--celeste); }
+  .crest .shield {
+    width:22px; height:26px; position:relative; display:inline-block;
+    background: linear-gradient(90deg,
+       var(--celeste) 0 33%, var(--white) 33% 66%, var(--celeste) 66% 100%);
+    clip-path: polygon(50% 0,100% 0,100% 62%,50% 100%,0 62%,0 0);
+    box-shadow: 0 0 0 1px rgba(255,255,255,.25) inset;
+  }
   .crest span {
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .22em; font-size: 12px; font-weight: 700; color: var(--ink);
+    font-family:var(--f-display); text-transform:uppercase;
+    letter-spacing:.2em; font-size:11.5px; font-weight:700; color:var(--ink);
   }
 
-  .name {
-    font-size: clamp(52px, 16vw, 108px);
-    font-weight: 700;
-    line-height: .9;
-    letter-spacing: .02em;
-    text-wrap: balance;
-    background: linear-gradient(180deg, #ffffff 0%, var(--celeste-hi) 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 24px rgba(111,183,234,.35));
-    margin: 6px 0 2px;
+  /* ===== HERO ===== */
+  .hero { position:relative; padding:40px 0 46px; text-align:center; overflow:hidden; }
+  #papelitos { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+  .hero .wrap { z-index:1; }
+
+  /* --- Carrusel de fotos --- */
+  .carousel {
+    position:relative; margin:26px auto 4px; max-width:340px;
+    aspect-ratio: 4/5; border-radius:18px; overflow:hidden;
+    border:3px solid var(--white);
+    box-shadow: 0 14px 40px rgba(0,0,0,.45), 0 0 0 6px rgba(99,179,228,.18);
+    background: var(--navy-2);
+  }
+  .carousel .track { display:flex; height:100%; transition: transform .55s cubic-bezier(.4,.05,.15,1); }
+  .carousel .slide { min-width:100%; height:100%; position:relative; }
+  .carousel .slide img { width:100%; height:100%; object-fit:cover; display:block; }
+  .carousel .ph {
+    width:100%; height:100%; display:grid; place-content:center; gap:8px; text-align:center;
+    background:
+      repeating-linear-gradient(135deg, rgba(170,220,255,.06) 0 14px, transparent 14px 28px),
+      linear-gradient(180deg, var(--navy-3), var(--navy-2));
+    color: var(--muted);
+  }
+  .carousel .ph .cam { font-size:34px; opacity:.8; }
+  .carousel .ph b { font-family:var(--f-display); letter-spacing:.14em; font-size:14px; color:var(--celeste-hi); }
+  .carousel .ph small { font-size:11.5px; }
+  .carousel .cap {
+    position:absolute; left:0; right:0; bottom:0; padding:26px 14px 12px;
+    background:linear-gradient(0deg, rgba(4,16,29,.85), transparent);
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:.14em;
+    font-size:12px; color:var(--white); text-align:left;
+  }
+  .carousel .nav {
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:36px; height:36px; border:none; border-radius:50%;
+    background:rgba(7,22,38,.6); color:var(--white); font-size:18px;
+    display:grid; place-content:center; cursor:pointer; backdrop-filter:blur(3px);
+  }
+  .carousel .nav:focus-visible { outline:2px solid var(--celeste-hi); outline-offset:2px; }
+  .carousel .prev { left:8px; } .carousel .next { right:8px; }
+  .dots { display:flex; gap:7px; justify-content:center; margin:12px 0 0; }
+  .dots button {
+    width:8px; height:8px; border-radius:50%; border:none; padding:0; cursor:pointer;
+    background:rgba(170,220,255,.3); transition:transform .2s, background .2s;
+  }
+  .dots button[aria-current="true"] { background:var(--celeste-hi); transform:scale(1.5); }
+
+  /* --- Camiseta / nombre + número --- */
+  .jersey { margin:28px 0 0; }
+  .nameplate {
+    display:inline-block;
+    font-family:var(--f-display); text-transform:uppercase; font-weight:700;
+    letter-spacing:.16em; font-size:clamp(26px,8vw,42px);
+    color:var(--white);
+    padding:0 6px 8px;
+    border-bottom:3px solid var(--celeste);
+    text-shadow:0 2px 14px rgba(99,179,228,.35);
+  }
+  .number {
+    font-family:var(--f-display); font-weight:700;
+    font-size:clamp(140px,42vw,240px); line-height:.85; letter-spacing:-.03em;
+    margin:2px 0 0;
+    background:linear-gradient(180deg,#ffffff 0%, var(--celeste) 78%, #3f86b8 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    filter: drop-shadow(0 8px 26px rgba(99,179,228,.4));
+  }
+  .star { color:var(--gold); font-size:16px; letter-spacing:.6em; }
+  .ribbon {
+    display:inline-block; margin-top:8px;
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:.32em;
+    font-size:13px; font-weight:700; color:var(--gold);
+    padding:6px 0; border-top:1px solid rgba(236,194,90,.4); border-bottom:1px solid rgba(236,194,90,.4);
+  }
+  .lede { max-width:32ch; margin:24px auto 0; color:var(--muted); font-size:16px; }
+  .lede b { color:var(--ink); font-weight:600; }
+
+  /* ===== COUNTDOWN ===== */
+  .count { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; max-width:400px; margin:30px auto 0; }
+  .count .cell { background:linear-gradient(180deg,var(--navy-2),var(--navy)); border:1px solid var(--line); border-radius:12px; padding:13px 4px 9px; }
+  .count .num { font-family:var(--f-display); font-weight:700; font-size:clamp(28px,8vw,42px); line-height:1; color:var(--celeste-hi); font-variant-numeric:tabular-nums; }
+  .count .lab { font-family:var(--f-display); text-transform:uppercase; letter-spacing:.16em; font-size:10px; color:var(--muted); margin-top:5px; }
+  .cal-btn {
+    display:inline-flex; align-items:center; gap:8px; margin:16px auto 0;
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:.16em; font-size:12.5px; font-weight:700;
+    color:var(--celeste-hi); text-decoration:none;
+    padding:10px 18px; border:1px solid var(--line); border-radius:100px; background:rgba(12,36,58,.5);
   }
 
-  .sixty {
-    position: relative;
-    font-family: var(--f-display);
-    font-weight: 700;
-    font-size: clamp(150px, 46vw, 300px);
-    line-height: .82;
-    letter-spacing: -.02em;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--gold);
-    text-shadow: 0 0 60px rgba(242,193,78,.28);
-    margin: 4px 0 0;
-  }
-  .sixty b {
-    -webkit-text-stroke: 0;
-    color: var(--gold);
-    background: linear-gradient(180deg, #ffe9a8, var(--gold-deep));
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-  }
-  .years-badge {
-    display: inline-block;
-    font-family: var(--f-display);
-    text-transform: uppercase; letter-spacing: .34em;
-    font-size: 13px; font-weight: 700; color: var(--gold);
-    padding: 6px 0;
-    border-top: 1px solid rgba(242,193,78,.4);
-    border-bottom: 1px solid rgba(242,193,78,.4);
-    margin-top: 2px;
-  }
-  .lede {
-    max-width: 34ch; margin: 26px auto 0;
-    color: var(--muted); font-size: 16px;
-  }
-  .lede b { color: var(--ink); font-weight: 600; }
+  /* ===== SECCIONES ===== */
+  section.block { padding:44px 0; }
+  .sec-head { text-align:center; margin-bottom:26px; }
+  .sec-head h2 { font-size:clamp(28px,8vw,42px); line-height:.95; text-wrap:balance; margin-top:7px; color:var(--white); }
+  .rule { width:64px; height:3px; margin:15px auto 0; background:linear-gradient(90deg,transparent,var(--celeste),var(--white),var(--celeste),transparent); }
 
-  /* ============ COUNTDOWN ============ */
-  .count {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 420px;
-    margin: 34px auto 0;
-  }
-  .count .cell {
-    background: linear-gradient(180deg, var(--navy-2), var(--navy));
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 14px 4px 10px;
-  }
-  .count .num {
-    font-family: var(--f-display); font-weight: 700;
-    font-size: clamp(30px, 9vw, 44px); line-height: 1;
-    color: var(--celeste-hi);
-    font-variant-numeric: tabular-nums;
-  }
-  .count .lab {
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .16em; font-size: 10px; color: var(--muted); margin-top: 6px;
-  }
+  .card { background:linear-gradient(180deg,rgba(18,49,76,.6),rgba(7,22,38,.65)); border:1px solid var(--line); border-radius:18px; overflow:hidden; }
 
-  /* ============ generic section ============ */
-  section.block { padding: 46px 0; }
-  .sec-head { text-align: center; margin-bottom: 28px; }
-  .sec-head h2 {
-    font-size: clamp(28px, 8vw, 44px);
-    letter-spacing: .01em; line-height: .95;
-    text-wrap: balance;
-    margin-top: 8px;
-  }
-  .rule {
-    width: 46px; height: 3px; margin: 16px auto 0;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
+  /* Ficha */
+  .ficha .row { display:flex; align-items:center; gap:15px; padding:17px 20px; border-bottom:1px solid var(--line); }
+  .ficha .row:last-of-type { border-bottom:0; }
+  .ficha .ic { flex:0 0 42px; height:42px; border-radius:11px; display:grid; place-items:center; background:rgba(99,179,228,.12); border:1px solid var(--line); font-size:20px; }
+  .ficha .k { font-family:var(--f-display); text-transform:uppercase; letter-spacing:.2em; font-size:11px; color:var(--muted); }
+  .ficha .v { font-size:18px; font-weight:600; color:var(--ink); }
+  .ficha .v small { display:block; font-weight:400; font-size:13px; color:var(--muted); }
+  .edit { color:var(--gold); font-weight:600; }
 
-  /* ---- Ficha del partido ---- */
-  .card {
-    background: linear-gradient(180deg, rgba(18,48,73,.65), rgba(7,19,32,.65));
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  .ficha .row {
-    display: flex; align-items: center; gap: 16px;
-    padding: 18px 22px;
-    border-bottom: 1px solid var(--line);
-  }
-  .ficha .row:last-of-type { border-bottom: 0; }
-  .ficha .ic {
-    flex: 0 0 42px; height: 42px; border-radius: 11px;
-    display: grid; place-items: center;
-    background: rgba(111,183,234,.12);
-    border: 1px solid var(--line);
-    font-size: 20px;
-  }
-  .ficha .k {
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .2em; font-size: 11px; color: var(--muted);
-  }
-  .ficha .v { font-size: 18px; font-weight: 600; color: var(--ink); }
-  .ficha .v small { display:block; font-weight: 400; font-size: 13px; color: var(--muted); }
-  .edit { color: var(--gold); font-weight: 600; }
+  .btn { display:block; text-align:center; text-decoration:none; cursor:pointer; border:none; width:auto;
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:.18em; font-weight:700; font-size:15px;
+    padding:16px; border-radius:13px; transition:transform .15s ease; }
+  .btn:active { transform:translateY(1px); }
+  .btn-map { margin:13px 20px 18px; color:var(--navy); background:linear-gradient(180deg,var(--celeste-hi),var(--celeste)); box-shadow:0 8px 22px rgba(99,179,228,.28); }
 
-  .btn {
-    display: block; text-align: center; text-decoration: none;
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .18em; font-weight: 700; font-size: 15px;
-    padding: 17px; border-radius: 13px;
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .btn-map {
-    margin: 14px 22px 20px;
-    color: var(--navy); background: linear-gradient(180deg, var(--celeste-hi), var(--celeste));
-    box-shadow: 0 8px 22px rgba(111,183,234,.28);
-  }
-  .btn:active { transform: translateY(1px); }
+  /* Alineación */
+  .lineup { display:grid; gap:11px; }
+  .player { display:flex; gap:15px; align-items:flex-start; background:linear-gradient(180deg,rgba(18,49,76,.5),rgba(7,22,38,.5)); border:1px solid var(--line); border-left:3px solid var(--celeste); border-radius:12px; padding:15px 17px; }
+  .player .no { font-family:var(--f-display); font-weight:700; font-size:30px; color:var(--celeste); line-height:1; min-width:40px; font-variant-numeric:tabular-nums; }
+  .player h3 { font-size:19px; letter-spacing:.02em; color:var(--ink); }
+  .player p { margin:4px 0 0; color:var(--muted); font-size:14.5px; }
+  .player.gold { border-left-color:var(--gold); } .player.gold .no { color:var(--gold); }
+  .player.grass { border-left-color:var(--grass); } .player.grass .no { color:var(--grass); }
 
-  /* ---- Alineación ---- */
-  .lineup { display: grid; gap: 12px; }
-  .player {
-    display: flex; gap: 16px; align-items: flex-start;
-    background: linear-gradient(180deg, rgba(18,48,73,.5), rgba(7,19,32,.5));
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--celeste);
-    border-radius: 12px;
-    padding: 16px 18px;
+  /* ===== RANKING DE TEMAS ===== */
+  .jukebox .card { padding:20px 18px; }
+  .form-row { display:flex; gap:9px; margin-bottom:6px; }
+  .form-row input {
+    flex:1; min-width:0; background:rgba(7,22,38,.7); border:1px solid var(--line);
+    border-radius:11px; padding:13px 14px; color:var(--ink); font-size:15px; font-family:var(--f-body);
   }
-  .player .no {
-    font-family: var(--f-display); font-weight: 700; font-size: 30px;
-    color: var(--celeste); line-height: 1; min-width: 42px;
-    font-variant-numeric: tabular-nums;
-  }
-  .player h3 { font-size: 19px; letter-spacing: .02em; color: var(--ink); }
-  .player p { margin: 4px 0 0; color: var(--muted); font-size: 14.5px; }
-  .player.gold { border-left-color: var(--gold); }
-  .player.gold .no { color: var(--gold); }
-  .player.grass { border-left-color: var(--grass); }
-  .player.grass .no { color: var(--grass); }
+  .form-row input::placeholder { color:#6c8ba4; }
+  .form-row input:focus { outline:2px solid var(--celeste); outline-offset:0; }
+  #songName { max-width:34%; }
+  .add-btn { flex:0 0 auto; border:none; cursor:pointer; padding:0 18px; border-radius:11px;
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:.12em; font-weight:700; font-size:15px;
+    color:var(--navy); background:linear-gradient(180deg,var(--celeste-hi),var(--celeste)); }
+  .rank-list { list-style:none; margin:16px 0 0; padding:0; display:grid; gap:8px; }
+  .rank-item { display:flex; align-items:center; gap:13px; padding:12px 14px; border-radius:11px;
+    background:rgba(7,22,38,.55); border:1px solid var(--line); transition:transform .3s ease; }
+  .rank-item .pos { font-family:var(--f-display); font-weight:700; font-size:20px; color:var(--muted); min-width:26px; text-align:center; font-variant-numeric:tabular-nums; }
+  .rank-item.top .pos { color:var(--gold); }
+  .rank-item .info { flex:1; min-width:0; }
+  .rank-item .info b { display:block; font-size:15.5px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rank-item .info span { font-size:12px; color:var(--muted); }
+  .vote { display:flex; align-items:center; gap:6px; border:1px solid var(--line); background:rgba(99,179,228,.1);
+    color:var(--celeste-hi); border-radius:100px; padding:7px 13px; cursor:pointer; font-size:14px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .vote[disabled] { opacity:.55; cursor:default; }
+  .vote .n { font-family:var(--f-display); }
+  .jukebox .note { text-align:center; color:var(--muted); font-size:12.5px; margin:14px auto 0; max-width:42ch; font-style:italic; }
+  .btn-playlist { margin:16px 0 0; color:#0a2915; background:linear-gradient(180deg,#7fe6a1,var(--grass)); box-shadow:0 8px 22px rgba(63,156,98,.28); }
 
-  /* ---- Deseos / pizarrón ---- */
-  .wish { display: grid; gap: 12px; }
-  .wish .item {
-    display: flex; align-items: center; gap: 16px;
-    background: rgba(7,19,32,.55);
-    border: 1px dashed rgba(242,193,78,.4);
-    border-radius: 12px; padding: 16px 18px;
-  }
-  .wish .em { font-size: 26px; }
-  .wish .tx b { display:block; font-size: 16px; color: var(--ink); }
-  .wish .tx span { font-size: 13px; color: var(--muted); }
-  .wish-note {
-    text-align:center; color: var(--muted); font-size: 13px;
-    margin: 16px auto 0; max-width: 40ch; font-style: italic;
-  }
+  /* Deseos */
+  .wish { display:grid; gap:11px; }
+  .wish .item { display:flex; align-items:center; gap:15px; background:rgba(7,22,38,.55); border:1px dashed rgba(236,194,90,.4); border-radius:12px; padding:15px 17px; }
+  .wish .em { font-size:26px; } .wish .tx b { display:block; font-size:16px; color:var(--ink); } .wish .tx span { font-size:13px; color:var(--muted); }
+  .wish-note { text-align:center; color:var(--muted); font-size:13px; margin:15px auto 0; max-width:40ch; font-style:italic; }
 
-  /* ---- RSVP ticket ---- */
-  .ticket {
-    position: relative;
-    background: linear-gradient(180deg, rgba(18,48,73,.85), rgba(7,19,32,.9));
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 30px 24px 28px;
-    text-align: center;
-    overflow: hidden;
-  }
-  .ticket::before, .ticket::after {
-    content:""; position:absolute; top: 50%; width: 26px; height: 26px;
-    background: var(--navy); border: 1px solid var(--line); border-radius: 50%;
-    transform: translateY(-50%);
-  }
-  .ticket::before { left: -14px; }
-  .ticket::after  { right: -14px; }
-  .ticket .stub {
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .3em; font-size: 11px; color: var(--gold); margin-bottom: 14px;
-  }
-  .ticket h2 { font-size: clamp(26px,7vw,36px); }
-  .ticket p { color: var(--muted); margin: 10px auto 22px; max-width: 32ch; font-size: 15px; }
-  .btn-wpp {
-    color: #062a12; background: linear-gradient(180deg, #7ee2a0, var(--grass));
-    box-shadow: 0 8px 22px rgba(70,180,115,.30);
-  }
+  /* RSVP ticket */
+  .ticket { position:relative; background:linear-gradient(180deg,rgba(18,49,76,.9),rgba(7,22,38,.92)); border:1px solid var(--line); border-radius:18px; padding:28px 22px 26px; text-align:center; overflow:hidden; }
+  .ticket::before,.ticket::after { content:""; position:absolute; top:50%; width:26px; height:26px; background:#04101d; border:1px solid var(--line); border-radius:50%; transform:translateY(-50%); }
+  .ticket::before { left:-14px; } .ticket::after { right:-14px; }
+  .ticket .stub { font-family:var(--f-display); text-transform:uppercase; letter-spacing:.3em; font-size:11px; color:var(--gold); margin-bottom:12px; }
+  .ticket h2 { font-size:clamp(26px,7vw,36px); color:var(--white); }
+  .ticket p { color:var(--muted); margin:9px auto 20px; max-width:32ch; font-size:15px; }
+  .btn-wpp { color:#062a12; background:linear-gradient(180deg,#7ee2a0,var(--grass)); box-shadow:0 8px 22px rgba(63,156,98,.30); }
+  .btn-share { margin-top:10px; color:var(--celeste-hi); background:transparent; border:1px solid var(--line); }
 
-  footer { text-align: center; padding: 40px 0 56px; color: var(--muted); }
-  footer .badge {
-    font-family: var(--f-display); text-transform: uppercase;
-    letter-spacing: .22em; font-size: 12px; color: var(--celeste);
-  }
-  footer .heart { color: var(--gold); }
+  footer { text-align:center; padding:38px 0 54px; color:var(--muted); }
+  footer .chant { font-family:var(--f-display); text-transform:uppercase; letter-spacing:.14em; font-size:14px; color:var(--celeste); line-height:1.6; }
+  footer .heart { color:var(--gold); }
 
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-  }
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1!important;transform:none!important;transition:none} .carousel .track{transition:none} }
 </style>
 
 <div class="stage">
 
   <!-- ================= HERO ================= -->
   <header class="hero">
-    <canvas id="fx"></canvas>
+    <canvas id="papelitos"></canvas>
     <div class="wrap">
-      <div class="crest">
-        <span class="dot"></span>
-        <span>Convocatoria Oficial</span>
+      <div class="crest"><span class="shield"></span><span>La Academia · Est. 1966</span></div>
+
+      <!-- CARRUSEL DE FOTOS (se llena desde el array PHOTOS del script) -->
+      <div class="carousel" id="carousel" aria-roledescription="carrusel" aria-label="Fotos de Christian">
+        <div class="track" id="track"></div>
+        <button class="nav prev" id="prev" aria-label="Anterior">‹</button>
+        <button class="nav next" id="next" aria-label="Siguiente">›</button>
+      </div>
+      <div class="dots" id="dots"></div>
+
+      <!-- CAMISETA -->
+      <div class="jersey">
+        <div class="nameplate">Christian</div>
+        <div class="number">60</div>
+        <div class="star">★</div>
+        <div class="ribbon">Toda una vida en Primera</div>
       </div>
 
-      <p class="eyebrow">La Academia de la vida presenta</p>
-      <h1 class="name">Christian</h1>
-      <div class="sixty" aria-label="60"><b>60</b></div>
-      <div class="years-badge">Temporada 1966 &middot; 2026</div>
+      <p class="lede">Se viene <b>el partido más importante del torneo</b>: Christian cumple 60. Sesenta vueltas al sol, hincha de la Academia hasta la médula. <b>Estás convocado.</b></p>
 
-      <p class="lede">Se juega <b>la fecha más importante del torneo</b>. Sesenta vueltas al sol, y todavía pidiendo la pelota. Estás convocado.</p>
-
-      <!-- countdown -->
       <div class="count" id="count" aria-label="Cuenta regresiva">
         <div class="cell"><div class="num" id="cd-d">--</div><div class="lab">Días</div></div>
         <div class="cell"><div class="num" id="cd-h">--</div><div class="lab">Horas</div></div>
         <div class="cell"><div class="num" id="cd-m">--</div><div class="lab">Min</div></div>
         <div class="cell"><div class="num" id="cd-s">--</div><div class="lab">Seg</div></div>
       </div>
+      <a class="cal-btn" id="calBtn" href="#" download="Cumple-60-Christian.ics">＋ Agendar la fecha</a>
     </div>
   </header>
 
-  <!-- ================= FICHA DEL PARTIDO ================= -->
+  <!-- ================= FICHA ================= -->
   <section class="block">
     <div class="wrap reveal">
-      <div class="sec-head">
-        <p class="eyebrow gold">Ficha del partido</p>
-        <h2>Cuándo &amp; Dónde</h2>
-        <div class="rule"></div>
-      </div>
-
+      <div class="sec-head"><p class="eyebrow gold">Ficha del partido</p><h2>Cuándo &amp; Dónde</h2><div class="rule"></div></div>
       <div class="card ficha">
-        <div class="row">
-          <div class="ic">📅</div>
-          <div><div class="k">Fecha</div><div class="v">Viernes 2 de Octubre, 2026</div></div>
-        </div>
-        <div class="row">
-          <div class="ic">🕘</div>
-          <div><div class="k">Hora</div><div class="v"><span class="edit">[EDITAR — ej. 21:00 hs]</span></div></div>
-        </div>
-        <div class="row">
-          <div class="ic">📍</div>
-          <div><div class="k">Estadio</div><div class="v"><span class="edit">[EDITAR — nombre del salón]</span><small>[EDITAR — dirección completa]</small></div></div>
-        </div>
+        <div class="row"><div class="ic">📅</div><div><div class="k">Fecha</div><div class="v">Viernes 2 de Octubre, 2026</div></div></div>
+        <div class="row"><div class="ic">🕘</div><div><div class="k">Hora</div><div class="v"><span class="edit">[EDITAR — ej. 21:00 hs]</span></div></div></div>
+        <div class="row"><div class="ic">📍</div><div><div class="k">El Cilindro</div><div class="v"><span class="edit">[EDITAR — nombre del salón]</span><small>[EDITAR — dirección completa]</small></div></div></div>
         <a class="btn btn-map" href="#" id="mapBtn" target="_blank" rel="noopener">Cómo llegar &nbsp;→</a>
       </div>
     </div>
@@ -360,67 +295,41 @@
   <!-- ================= ALINEACIÓN ================= -->
   <section class="block">
     <div class="wrap reveal">
-      <div class="sec-head">
-        <p class="eyebrow">La formación titular</p>
-        <h2>El festejado</h2>
-        <div class="rule"></div>
-      </div>
-
+      <div class="sec-head"><p class="eyebrow">La formación titular</p><h2>El festejado</h2><div class="rule"></div></div>
       <div class="lineup">
-        <div class="player">
-          <div class="no">9</div>
-          <div>
-            <h3>Hincha de Racing</h3>
-            <p>Celeste y blanco hasta la médula. De la Academia en las buenas, en las malas y en las peores.</p>
-          </div>
-        </div>
-        <div class="player">
-          <div class="no">10</div>
-          <div>
-            <h3>Fanático de la Scaloneta</h3>
-            <p>Messi, De Paul y Lautaro de memoria. Sufre cada partido como si lo jugara él.</p>
-          </div>
-        </div>
-        <div class="player gold">
-          <div class="no">7</div>
-          <div>
-            <h3>Viajero de tiempo completo</h3>
-            <p>Kilómetros recorridos: incontables. Valija siempre lista. Próximo destino: sus 60.</p>
-          </div>
-        </div>
-        <div class="player grass">
-          <div class="no">4</div>
-          <div>
-            <h3>DT del asado</h3>
-            <p>Le encanta comerlo… prenderlo no tanto. Dirige la parrilla desde el banco, cerveza en mano.</p>
-          </div>
-        </div>
+        <div class="player"><div class="no">9</div><div><h3>Hincha de Racing</h3><p>Celeste y blanco hasta la médula. De la Academia en las buenas, en las malas y en las peores.</p></div></div>
+        <div class="player"><div class="no">10</div><div><h3>De la Scaloneta y de Milito</h3><p>Messi, De Paul, Lautaro y el Príncipe de memoria. Sufre cada partido como si lo jugara él.</p></div></div>
+        <div class="player gold"><div class="no">7</div><div><h3>Viajero de tiempo completo</h3><p>Kilómetros recorridos: incontables. La valija siempre lista. Próximo destino: sus 60.</p></div></div>
+        <div class="player grass"><div class="no">4</div><div><h3>DT del asado</h3><p>Le encanta comerlo… prenderlo no tanto. Dirige la parrilla desde el banco, con una fresca en la mano.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= LISTA DE DESEOS ================= -->
+  <!-- ================= RANKING DE TEMAS ================= -->
+  <section class="block jukebox">
+    <div class="wrap reveal">
+      <div class="sec-head"><p class="eyebrow gold">La previa la armamos entre todos</p><h2>Temas que no pueden faltar</h2><div class="rule"></div></div>
+      <div class="card">
+        <div class="form-row">
+          <input id="songName" type="text" maxlength="18" placeholder="Tu nombre" aria-label="Tu nombre" />
+          <input id="songInput" type="text" maxlength="60" placeholder="Sugerí una canción…" aria-label="Canción" />
+          <button class="add-btn" id="addSong" type="button">＋</button>
+        </div>
+        <ol class="rank-list" id="rankList"></ol>
+        <a class="btn btn-playlist" id="playlistBtn" href="#" target="_blank" rel="noopener">🎵 Sumala a la playlist oficial</a>
+        <p class="note">Tus sugerencias se guardan en este dispositivo. Para que suenen en la fiesta, sumalas también a la playlist oficial 👆</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DESEOS ================= -->
   <section class="block">
     <div class="wrap reveal">
-      <div class="sec-head">
-        <p class="eyebrow gold">Pizarrón de deseos</p>
-        <h2>Lista del capitán</h2>
-        <div class="rule"></div>
-      </div>
-
+      <div class="sec-head"><p class="eyebrow gold">Pizarrón de deseos</p><h2>Lista del capitán</h2><div class="rule"></div></div>
       <div class="wish">
-        <div class="item">
-          <div class="em">🐐</div>
-          <div class="tx"><b>Un saludo de Messi</b><span>Cosa fina, nomás. Si puede ser en video, mejor.</span></div>
-        </div>
-        <div class="item">
-          <div class="em">🇦🇷</div>
-          <div class="tx"><b>Un saludo de Lautaro Martínez</b><span>Que le mande un abrazo y un gol dedicado.</span></div>
-        </div>
-        <div class="item">
-          <div class="em">🏆</div>
-          <div class="tx"><b>Una Libertadores para Racing</b><span>El regalo soñado. Aceptamos aportes a la causa.</span></div>
-        </div>
+        <div class="item"><div class="em">🐐</div><div class="tx"><b>Un saludo de Messi</b><span>Cosa fina, nomás. Si es en video, mejor.</span></div></div>
+        <div class="item"><div class="em">🇦🇷</div><div class="tx"><b>Un saludo de Lautaro Martínez</b><span>Que le mande un abrazo y un gol dedicado.</span></div></div>
+        <div class="item"><div class="em">🏆</div><div class="tx"><b>Una Libertadores para Racing</b><span>El sueño eterno. Aceptamos aportes a la causa.</span></div></div>
       </div>
       <p class="wish-note">* Estamos gestionando estos regalos. Mientras tanto, tu presencia ya vale la Copa.</p>
     </div>
@@ -430,17 +339,18 @@
   <section class="block">
     <div class="wrap reveal">
       <div class="ticket">
-        <div class="stub">Entrada &middot; Tribuna VIP</div>
+        <div class="stub">Entrada · Tribuna Preferencial</div>
         <h2>Confirmá tu lugar</h2>
         <p>Los cupos son como las entradas de un clásico: se agotan. Avisanos que venís.</p>
         <a class="btn btn-wpp" href="#" id="wppBtn" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+        <button class="btn btn-share" id="shareBtn" type="button">Compartir la invitación</button>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="badge">★ 60 años en primera división ★</div>
-    <p>Hecho con <span class="heart">♥</span> para Christian</p>
+    <p class="chant">“Racing, Racing querido,<br>hoy te vengo a saludar…”</p>
+    <p>Hecho con <span class="heart">♥</span> para Christian · 60 años</p>
   </footer>
 
 </div>
@@ -449,106 +359,186 @@
 (function () {
   "use strict";
 
-  /* ---------- CONFIG (editá acá) ---------- */
-  var EVENT = new Date(2026, 9, 2, 21, 0, 0); // 2 Oct 2026, 21:00  (mes 9 = octubre)
+  /* ================= CONFIG — editá acá ================= */
+  var EVENT = new Date(2026, 9, 2, 21, 0, 0);   // 2 Oct 2026, 21:00 (mes 9 = octubre)
+  var MAPS_URL = "";        // ej: "https://maps.google.com/?q=Salon+Direccion"
+  var WPP_PHONE = "";       // ej: "5491122334455"  (país+área, sin + ni espacios)
+  var WPP_TEXT  = "¡Hola! Confirmo mi asistencia al cumple de 60 de Christian 🎉";
+  var PLAYLIST_URL = "";    // ej: link a la playlist colaborativa de Spotify
+  var LOCATION_TXT = "A confirmar";
 
-  // Cuando tengas los datos, reemplazá estos:
-  var MAPS_URL = "";          // ej: "https://maps.google.com/?q=Direccion+del+salon"
-  var WPP_PHONE = "";         // ej: "5491122334455" (código país + área, sin + ni espacios)
-  var WPP_TEXT  = "Hola! Confirmo mi asistencia al cumple de 60 de Christian 🎉";
+  /* FOTOS: cuando me las pases, quedan acá como "data:image/..." (base64).
+     Mientras el array esté vacío, se muestran marcos de "Foto 1, 2, 3…". */
+  var PHOTOS = [
+    // { src: "data:image/jpeg;base64,....", cap: "Christian y la celeste" },
+  ];
 
-  var mapBtn = document.getElementById("mapBtn");
-  var wppBtn = document.getElementById("wppBtn");
-  if (MAPS_URL) { mapBtn.href = MAPS_URL; }
-  else { mapBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar la dirección / link de Google Maps."); }); }
+  /* ================= CARRUSEL ================= */
+  var track = document.getElementById("track");
+  var dotsBox = document.getElementById("dots");
+  var slides = PHOTOS.length ? PHOTOS : [
+    { ph:1 }, { ph:2 }, { ph:3 }, { ph:4 }
+  ];
+  slides.forEach(function (s, i) {
+    var el = document.createElement("div");
+    el.className = "slide";
+    if (s.src) {
+      el.innerHTML = '<img src="' + s.src + '" alt="Christian, foto ' + (i+1) + '">' +
+                     (s.cap ? '<div class="cap">' + s.cap + '</div>' : '');
+    } else {
+      el.innerHTML = '<div class="ph"><div class="cam">📷</div><b>Foto ' + s.ph + '</b><small>próximamente</small></div>';
+    }
+    track.appendChild(el);
+    var d = document.createElement("button");
+    d.setAttribute("aria-label", "Ir a la foto " + (i+1));
+    d.addEventListener("click", function(){ go(i); });
+    dotsBox.appendChild(d);
+  });
 
-  if (WPP_PHONE) { wppBtn.href = "https://wa.me/" + WPP_PHONE + "?text=" + encodeURIComponent(WPP_TEXT); }
-  else { wppBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el número de WhatsApp para confirmar."); }); }
+  var idx = 0, count = slides.length;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function render(){
+    track.style.transform = "translateX(" + (-idx * 100) + "%)";
+    dotsBox.querySelectorAll("button").forEach(function(b,i){ b.setAttribute("aria-current", i===idx ? "true":"false"); });
+  }
+  function go(i){ idx = (i + count) % count; render(); }
+  document.getElementById("prev").addEventListener("click", function(){ go(idx-1); stopAuto(); });
+  document.getElementById("next").addEventListener("click", function(){ go(idx+1); stopAuto(); });
+  render();
 
-  /* ---------- COUNTDOWN ---------- */
-  var dEl = document.getElementById("cd-d"),
-      hEl = document.getElementById("cd-h"),
-      mEl = document.getElementById("cd-m"),
-      sEl = document.getElementById("cd-s");
-  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  // swipe
+  var x0 = null;
+  track.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener("touchend", function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) { go(idx + (dx < 0 ? 1 : -1)); stopAuto(); }
+    x0 = null;
+  });
+  // autoplay
+  var auto = null;
+  function startAuto(){ if(!reduce && count > 1){ auto = setInterval(function(){ go(idx+1); }, 4200); } }
+  function stopAuto(){ if(auto){ clearInterval(auto); auto = null; } }
+  startAuto();
+
+  /* ================= LINKS ================= */
+  var mapBtn = document.getElementById("mapBtn"),
+      wppBtn = document.getElementById("wppBtn"),
+      plBtn  = document.getElementById("playlistBtn");
+  if (MAPS_URL) mapBtn.href = MAPS_URL;
+  else mapBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar la dirección / link de Google Maps."); });
+  if (WPP_PHONE) wppBtn.href = "https://wa.me/" + WPP_PHONE + "?text=" + encodeURIComponent(WPP_TEXT);
+  else wppBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el número de WhatsApp para confirmar."); });
+  if (PLAYLIST_URL) plBtn.href = PLAYLIST_URL;
+  else plBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el link de la playlist (Spotify colaborativa o WhatsApp)."); });
+
+  /* ================= AGENDAR (.ics) ================= */
+  function pad(n){ return (n<10?"0":"")+n; }
+  function icsDate(d){ return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+"T"+pad(d.getUTCHours())+pad(d.getUTCMinutes())+"00Z"; }
+  var end = new Date(EVENT.getTime() + 6*3600*1000);
+  var ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cumple60//ES","BEGIN:VEVENT",
+    "DTSTART:"+icsDate(EVENT),"DTEND:"+icsDate(end),
+    "SUMMARY:Cumple 60 de Christian 🎉","LOCATION:"+LOCATION_TXT,
+    "DESCRIPTION:¡La Academia festeja los 60 de Christian! Celeste y blanco.","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  document.getElementById("calBtn").href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+
+  /* ================= COUNTDOWN ================= */
+  var dEl=document.getElementById("cd-d"),hEl=document.getElementById("cd-h"),mEl=document.getElementById("cd-m"),sEl=document.getElementById("cd-s");
   function tick(){
     var diff = EVENT.getTime() - Date.now();
-    if (diff <= 0){
-      dEl.textContent = "0"; hEl.textContent = "00"; mEl.textContent = "00"; sEl.textContent = "00";
-      document.querySelector(".count .lab").parentElement.parentElement
-        .setAttribute("aria-label", "¡Es hoy!");
-      return;
-    }
+    if (diff <= 0){ dEl.textContent="0"; hEl.textContent=mEl.textContent=sEl.textContent="00"; return; }
     var s = Math.floor(diff/1000);
     dEl.textContent = Math.floor(s/86400);
     hEl.textContent = pad(Math.floor(s%86400/3600));
     mEl.textContent = pad(Math.floor(s%3600/60));
     sEl.textContent = pad(s%60);
   }
-  tick(); setInterval(tick, 1000);
+  tick(); setInterval(tick,1000);
 
-  /* ---------- REVEAL ON SCROLL ---------- */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
-  }, { threshold: .15 });
+  /* ================= RANKING DE TEMAS (localStorage) ================= */
+  var KEY = "cumple60-christian-songs-v1", VKEY = "cumple60-christian-voted-v1";
+  var seed = [
+    { id:"s1", t:"Racing te quiero (Los del Cilindro)", by:"La barra", v:9 },
+    { id:"s2", t:"La Mosca — Para No Verte Más", by:"Fer", v:7 },
+    { id:"s3", t:"Rodrigo — Soy Cordobés", by:"Beto", v:6 },
+    { id:"s4", t:"Los Palmeras — Bombón Asesino", by:"Sole", v:5 }
+  ];
+  var songs, voted;
+  try { songs = JSON.parse(localStorage.getItem(KEY)) || seed.slice(); } catch(e){ songs = seed.slice(); }
+  try { voted = JSON.parse(localStorage.getItem(VKEY)) || {}; } catch(e){ voted = {}; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(songs)); localStorage.setItem(VKEY, JSON.stringify(voted)); }catch(e){} }
+
+  var listEl = document.getElementById("rankList");
+  function paint(){
+    songs.sort(function(a,b){ return b.v - a.v; });
+    listEl.innerHTML = "";
+    songs.forEach(function(s, i){
+      var li = document.createElement("li");
+      li.className = "rank-item" + (i < 3 ? " top" : "");
+      var medal = i===0?"🥇":i===1?"🥈":i===2?"🥉":(i+1);
+      li.innerHTML =
+        '<div class="pos">'+medal+'</div>'+
+        '<div class="info"><b></b><span></span></div>'+
+        '<button class="vote"'+(voted[s.id]?" disabled":"")+'><span>▲</span><span class="n">'+s.v+'</span></button>';
+      li.querySelector("b").textContent = s.t;
+      li.querySelector(".info span").textContent = s.by ? ("sugerida por " + s.by) : "";
+      var btn = li.querySelector(".vote");
+      btn.addEventListener("click", function(){
+        if (voted[s.id]) return;
+        s.v++; voted[s.id] = 1; save(); paint();
+      });
+      listEl.appendChild(li);
+    });
+  }
+  paint();
+
+  var nameEl = document.getElementById("songName"), inEl = document.getElementById("songInput");
+  function addSong(){
+    var t = (inEl.value || "").trim();
+    if (!t) { inEl.focus(); return; }
+    var by = (nameEl.value || "").trim();
+    var id = "u" + Date.now();
+    songs.push({ id:id, t:t, by:by, v:1 });
+    voted[id] = 1; save();
+    inEl.value = ""; paint();
+  }
+  document.getElementById("addSong").addEventListener("click", addSong);
+  inEl.addEventListener("keydown", function(e){ if(e.key==="Enter") addSong(); });
+
+  /* ================= COMPARTIR ================= */
+  document.getElementById("shareBtn").addEventListener("click", function(){
+    var data = { title:"Cumple 60 de Christian", text:"¡Estás invitado al cumple de 60 de Christian! 🎉⚽", url: location.href };
+    if (navigator.share) { navigator.share(data).catch(function(){}); }
+    else {
+      var msg = encodeURIComponent(data.text + " " + location.href);
+      window.open("https://wa.me/?text=" + msg, "_blank");
+    }
+  });
+
+  /* ================= REVEAL ================= */
+  var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, {threshold:.14});
   document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
 
-  /* ---------- HERO CANVAS: reflectores + confeti celeste ---------- */
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var cv = document.getElementById("fx");
-  var ctx = cv.getContext("2d");
-  var W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
-  var parts = [];
-  var COLORS = ["#a6d8ff", "#6fb7ea", "#ffffff", "#f2c14e"];
-
-  function resize(){
-    var r = cv.getBoundingClientRect();
-    W = r.width; H = r.height;
-    cv.width = W * DPR; cv.height = H * DPR;
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  }
-  function seed(){
-    parts = [];
-    var n = Math.round(W / 14);
-    for (var i = 0; i < n; i++){
-      parts.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: 1 + Math.random()*3,
-        vy: .3 + Math.random()*.9,
-        vx: -.4 + Math.random()*.8,
-        c: COLORS[(Math.random()*COLORS.length)|0],
-        a: .3 + Math.random()*.6,
-        sw: Math.random()*Math.PI*2
-      });
-    }
-  }
-  function drawGlow(){
-    // dos halos de reflector
-    var g1 = ctx.createRadialGradient(W*0.22, -40, 0, W*0.22, -40, H*0.9);
-    g1.addColorStop(0, "rgba(166,216,255,.20)"); g1.addColorStop(1, "rgba(166,216,255,0)");
-    ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
-    var g2 = ctx.createRadialGradient(W*0.80, -40, 0, W*0.80, -40, H*0.9);
-    g2.addColorStop(0, "rgba(111,183,234,.16)"); g2.addColorStop(1, "rgba(111,183,234,0)");
-    ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
-  }
+  /* ================= PAPELITOS (recibimiento celeste y blanco) ================= */
+  var cv = document.getElementById("papelitos"), ctx = cv.getContext("2d");
+  var W,H,DPR = Math.min(window.devicePixelRatio||1,2), bits=[];
+  var COLORS = ["#aadcff","#f4fbff","#63b3e4","#ffffff"];
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+  function seedBits(){ bits=[]; var n=Math.round(W/22); for(var i=0;i<n;i++){ bits.push({ x:Math.random()*W, y:Math.random()*H, w:4+Math.random()*5, h:7+Math.random()*8, vy:.5+Math.random()*1.1, vx:-.4+Math.random()*.8, rot:Math.random()*Math.PI, vr:-.05+Math.random()*.1, c:COLORS[(Math.random()*COLORS.length)|0], a:.35+Math.random()*.5 }); } }
+  function glow(){ var g=ctx.createRadialGradient(W/2,-30,0,W/2,-30,H*.9); g.addColorStop(0,"rgba(99,179,228,.14)"); g.addColorStop(1,"rgba(99,179,228,0)"); ctx.fillStyle=g; ctx.fillRect(0,0,W,H); }
   function frame(){
-    ctx.clearRect(0,0,W,H);
-    drawGlow();
-    for (var i=0;i<parts.length;i++){
-      var p = parts[i];
-      p.y += p.vy; p.x += p.vx + Math.sin(p.sw)*0.3; p.sw += 0.02;
-      if (p.y > H+8){ p.y = -8; p.x = Math.random()*W; }
-      if (p.x < -8) p.x = W+8; if (p.x > W+8) p.x = -8;
-      ctx.globalAlpha = p.a;
-      ctx.fillStyle = p.c;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    ctx.clearRect(0,0,W,H); glow();
+    for (var i=0;i<bits.length;i++){ var p=bits[i];
+      p.y+=p.vy; p.x+=p.vx+Math.sin(p.y*.02)*.3; p.rot+=p.vr;
+      if(p.y>H+12){ p.y=-12; p.x=Math.random()*W; }
+      if(p.x<-12) p.x=W+12; if(p.x>W+12) p.x=-12;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.a; ctx.fillStyle=p.c;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
     }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(frame);
+    ctx.globalAlpha=1; requestAnimationFrame(frame);
   }
-  function init(){ resize(); seed(); if(reduce){ ctx.clearRect(0,0,W,H); drawGlow(); } else { frame(); } }
-  window.addEventListener("resize", function(){ resize(); seed(); });
-  init();
+  function initFx(){ resize(); seedBits(); if(reduce){ ctx.clearRect(0,0,W,H); glow(); } else frame(); }
+  window.addEventListener("resize", function(){ resize(); seedBits(); });
+  initFx();
 })();
 </script>
