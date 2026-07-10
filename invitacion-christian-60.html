@@ -286,7 +286,8 @@
       <div class="card ficha">
         <div class="row"><div class="ic">📅</div><div><div class="k">Fecha</div><div class="v">Viernes 2 de Octubre, 2026</div></div></div>
         <div class="row"><div class="ic">🕘</div><div><div class="k">Hora</div><div class="v"><span class="edit">[EDITAR — ej. 21:00 hs]</span></div></div></div>
-        <div class="row"><div class="ic">📍</div><div><div class="k">El Cilindro</div><div class="v"><span class="edit">[EDITAR — nombre del salón]</span><small>[EDITAR — dirección completa]</small></div></div></div>
+        <div class="row"><div class="ic">📍</div><div><div class="k">El Cilindro</div><div class="v">Juan Bautista Alberdi 415<small>Olivos, Buenos Aires · Estacionamiento en el lugar</small></div></div></div>
+        <div class="row"><div class="ic">✨</div><div><div class="k">Código de vestimenta</div><div class="v">Elegante sport</div></div></div>
         <a class="btn btn-map" href="#" id="mapBtn" target="_blank" rel="noopener">Cómo llegar &nbsp;→</a>
       </div>
     </div>
@@ -317,7 +318,7 @@
         </div>
         <ol class="rank-list" id="rankList"></ol>
         <a class="btn btn-playlist" id="playlistBtn" href="#" target="_blank" rel="noopener">🎵 Sumala a la playlist oficial</a>
-        <p class="note">Tus sugerencias se guardan en este dispositivo. Para que suenen en la fiesta, sumalas también a la playlist oficial 👆</p>
+        <p class="note">Va a haber DJ 🎧. Tus sugerencias se guardan en este dispositivo; para que lleguen a la cabina, sumalas también a la playlist oficial 👆</p>
       </div>
     </div>
   </section>
@@ -341,7 +342,7 @@
       <div class="ticket">
         <div class="stub">Entrada · Tribuna Preferencial</div>
         <h2>Confirmá tu lugar</h2>
-        <p>Los cupos son como las entradas de un clásico: se agotan. Avisanos que venís.</p>
+        <p>Contanos que venís y cuántos son — parejas y familia, ¡todos bienvenidos!</p>
         <a class="btn btn-wpp" href="#" id="wppBtn" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
         <button class="btn btn-share" id="shareBtn" type="button">Compartir la invitación</button>
       </div>
@@ -361,11 +362,11 @@
 
   /* ================= CONFIG — editá acá ================= */
   var EVENT = new Date(2026, 9, 2, 21, 0, 0);   // 2 Oct 2026, 21:00 (mes 9 = octubre)
-  var MAPS_URL = "";        // ej: "https://maps.google.com/?q=Salon+Direccion"
+  var MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Juan%20Bautista%20Alberdi%20415%2C%20Olivos%2C%20Buenos%20Aires";
   var WPP_PHONE = "";       // ej: "5491122334455"  (país+área, sin + ni espacios)
-  var WPP_TEXT  = "¡Hola! Confirmo mi asistencia al cumple de 60 de Christian 🎉";
+  var WPP_TEXT  = "¡Hola! Confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
   var PLAYLIST_URL = "";    // ej: link a la playlist colaborativa de Spotify
-  var LOCATION_TXT = "A confirmar";
+  var LOCATION_TXT = "Juan Bautista Alberdi 415, Olivos, Buenos Aires";
 
   /* FOTOS: cuando me las pases, quedan acá como "data:image/..." (base64).
      Mientras el array esté vacío, se muestran marcos de "Foto 1, 2, 3…". */
