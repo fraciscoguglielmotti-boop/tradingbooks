@@ -543,6 +543,7 @@
   /* ================= CONFIG — editá acá ================= */
   var EVENT = new Date(2026, 9, 2, 21, 0, 0);   // 2 Oct 2026, 21:00 (mes 9 = octubre)
   var MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Juan%20Bautista%20Alberdi%20415%2C%20Olivos%2C%20Buenos%20Aires";
+  var FORM_URL = "";        // link a tu Google Form de confirmación (si lo cargás, el botón abre el form)
   var WPP_PHONE = "";       // ej: "5491122334455" (país+área, sin + ni espacios)
   var WPP_TEXT  = "¡Hola! Confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
   var PLAYLIST_URL = "";    // link a la playlist colaborativa de Spotify
@@ -598,8 +599,9 @@
   /* ================= LINKS ================= */
   var mapBtn=document.getElementById("mapBtn"), wppBtn=document.getElementById("wppBtn"), plBtn=document.getElementById("playlistBtn");
   if (MAPS_URL) mapBtn.href = MAPS_URL;
-  if (WPP_PHONE) wppBtn.href = "https://wa.me/"+WPP_PHONE+"?text="+encodeURIComponent(WPP_TEXT);
-  else wppBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el número de WhatsApp para confirmar."); });
+  if (FORM_URL) { wppBtn.href = FORM_URL; wppBtn.textContent = "Confirmar asistencia →"; }
+  else if (WPP_PHONE) { wppBtn.href = "https://wa.me/"+WPP_PHONE+"?text="+encodeURIComponent(WPP_TEXT); }
+  else wppBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el link del formulario (o el WhatsApp) para confirmar."); });
   if (PLAYLIST_URL) plBtn.href = PLAYLIST_URL;
   else plBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el link de la playlist (Spotify colaborativa o WhatsApp)."); });
 
