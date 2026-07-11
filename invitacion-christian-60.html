@@ -54,7 +54,19 @@
       radial-gradient(1.5px 1.5px at 30% 85%, rgba(255,255,255,.3), transparent);
   }
 
+  #papelitos { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 18px; position: relative; z-index: 1; }
+
+  .top-title { text-align: center; padding: 30px 18px 4px; }
+  .top-title .tt-eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--celeste-2); margin: 0 0 10px; }
+  .top-title .tt {
+    font-family: var(--f-cond); text-transform: uppercase; font-weight: 700;
+    font-size: clamp(46px,16vw,82px); line-height: .88; letter-spacing: .02em; margin: 0;
+    background: linear-gradient(180deg, #ffffff 0%, #a6d8ff 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 6px 22px rgba(111,183,234,.35));
+  }
 
   /* =========================================================
      SOBRE LACRADO (pantalla de apertura)
@@ -382,9 +394,16 @@
 
 <!-- ================= INVITACIÓN ================= -->
 <div class="stage" id="stage">
+  <canvas id="papelitos" aria-hidden="true"></canvas>
+
+  <!-- ===== TÍTULO ===== -->
+  <div class="wrap top-title">
+    <p class="tt-eyebrow">✈ Racing Airlines · Vuelo RC60</p>
+    <h1 class="tt">Mis 60</h1>
+  </div>
 
   <!-- ===== PASE DE ABORDAR (hero) ===== -->
-  <header class="wrap" style="padding-top:26px">
+  <header class="wrap" style="padding-top:10px">
     <div class="ticket reveal in">
       <div class="tk-band">
         <div class="brand"><span class="shield"></span><b>Racing Airlines</b></div>
@@ -403,10 +422,10 @@
         </div>
 
         <div class="bp-grid">
-          <div class="cell"><div class="label">Puerta / Gate</div><div class="value">Olivos</div></div>
+          <div class="cell"><div class="label">Puerta / Gate</div><div class="value">Yacht Club Olivos</div></div>
           <div class="cell"><div class="label">Tribuna / Seat</div><div class="value">Preferencial</div></div>
           <div class="cell"><div class="label">Fecha / Date</div><div class="value">Vie 02 OCT</div></div>
-          <div class="cell"><div class="label">Embarque / Boarding</div><div class="value edit">[EDITAR hora]</div></div>
+          <div class="cell"><div class="label">Embarque / Boarding</div><div class="value">20:30 hs</div></div>
         </div>
 
         <p class="bp-note"><b>Christian cumple 60.</b> El vuelo más importante del año despega en El Cilindro de Avellaneda. Equipaje: buena onda. Estás convocado a bordo.</p>
@@ -447,8 +466,8 @@
       <div class="ticket">
         <div class="info-grid">
           <div class="cell"><div class="label">Fecha</div><div class="value">Vie 2 Oct 2026</div></div>
-          <div class="cell"><div class="label">Embarque</div><div class="value edit">[EDITAR hora]</div></div>
-          <div class="cell full"><div class="label">Destino · El Cilindro</div><div class="value">Juan B. Alberdi 415<small>Olivos, Buenos Aires · Estacionamiento en el lugar</small></div></div>
+          <div class="cell"><div class="label">Embarque</div><div class="value">20:30 hs</div></div>
+          <div class="cell full"><div class="label">Destino · El Cilindro</div><div class="value">Yacht Club Olivos<small>Juan B. Alberdi 415 · Olivos, Buenos Aires · Estacionamiento en el lugar</small></div></div>
           <div class="cell full"><div class="label">Código de vestimenta</div><div class="value">Elegante sport</div></div>
         </div>
         <a class="btn btn-primary" href="#" id="mapBtn" target="_blank" rel="noopener">Cómo llegar ✈ →</a>
@@ -475,7 +494,6 @@
       <div class="sec-head"><p class="eyebrow">Manifiesto de a bordo</p><h2>Datos del pasajero</h2><div class="rule"></div></div>
       <div class="pax-list">
         <div class="pax"><div class="stamp">RACING</div><div><h3>Hincha de la Academia</h3><p>Celeste y blanco hasta la médula. En las buenas, en las malas y en las peores.</p></div></div>
-        <div class="pax"><div class="stamp">SELECCIÓN</div><div><h3>De la Scaloneta y de Milito</h3><p>Messi, De Paul, Lautaro y el Príncipe de memoria. Sufre cada partido como si lo jugara él.</p></div></div>
         <div class="pax"><div class="stamp">✈ MILLAS</div><div><h3>Viajero de tiempo completo</h3><p>Kilómetros recorridos: incontables. La valija siempre lista. Próximo destino: sus 60.</p></div></div>
         <div class="pax"><div class="stamp">ASADO</div><div><h3>DT del asado</h3><p>Le encanta comerlo… prenderlo no tanto. Dirige la parrilla desde el banco, con una fresca en la mano.</p></div></div>
       </div>
@@ -541,7 +559,7 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ================= CONFIG — editá acá ================= */
-  var EVENT = new Date(2026, 9, 2, 21, 0, 0);   // 2 Oct 2026, 21:00 (mes 9 = octubre)
+  var EVENT = new Date(2026, 9, 2, 20, 30, 0);  // 2 Oct 2026, 20:30 (mes 9 = octubre)
   var MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Juan%20Bautista%20Alberdi%20415%2C%20Olivos%2C%20Buenos%20Aires";
   var FORM_URL = "";        // link a tu Google Form de confirmación (si lo cargás, el botón abre el form)
   var WPP_PHONE = "";       // ej: "5491122334455" (país+área, sin + ni espacios)
@@ -562,6 +580,7 @@
   function openEnv(){
     if (opened) return; opened = true;
     scene.classList.add("opening");
+    startPapelitos();
     var t1 = reduce ? 150 : 1500;
     var t2 = reduce ? 400 : 2300;
     setTimeout(function(){ scene.classList.add("done"); }, t1);
@@ -640,6 +659,32 @@
     if (navigator.share) navigator.share(data).catch(function(){});
     else window.open("https://wa.me/?text="+encodeURIComponent(data.text+" "+location.href), "_blank");
   });
+
+  /* ================= PAPELITOS DE FONDO ================= */
+  var pStarted = false;
+  function startPapelitos(){
+    if (pStarted) return; pStarted = true;
+    var cv = document.getElementById("papelitos"), ctx = cv.getContext("2d");
+    var W, H, DPR = Math.min(window.devicePixelRatio||1, 2), bits = [];
+    var COLORS = ["#a6d8ff","#ffffff","#6fb7ea","#d7dee5","#2b6f9e"];
+    function resize(){ W=window.innerWidth; H=window.innerHeight; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+    function seed(){ bits=[]; var n=Math.round(W/24); for(var i=0;i<n;i++){ bits.push({ x:Math.random()*W, y:Math.random()*H, w:4+Math.random()*5, h:7+Math.random()*8, vy:.5+Math.random()*1.2, vx:-.5+Math.random()*1, rot:Math.random()*Math.PI, vr:-.05+Math.random()*.1, c:COLORS[(Math.random()*COLORS.length)|0], a:.35+Math.random()*.5 }); } }
+    function frame(){
+      ctx.clearRect(0,0,W,H);
+      for (var i=0;i<bits.length;i++){ var p=bits[i];
+        p.y+=p.vy; p.x+=p.vx+Math.sin(p.y*.02)*.35; p.rot+=p.vr;
+        if(p.y>H+12){ p.y=-12; p.x=Math.random()*W; }
+        if(p.x<-12) p.x=W+12; if(p.x>W+12) p.x=-12;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.a; ctx.fillStyle=p.c;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+      }
+      ctx.globalAlpha=1; requestAnimationFrame(frame);
+    }
+    resize(); seed();
+    window.addEventListener("resize", function(){ resize(); seed(); });
+    if (reduce){ /* estático: una sola pasada */ frame && ctx.clearRect(0,0,W,H); }
+    else frame();
+  }
 
   /* ================= REVEAL ================= */
   var io=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, {threshold:.12});
