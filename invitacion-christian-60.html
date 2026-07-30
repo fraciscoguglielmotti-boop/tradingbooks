@@ -535,8 +535,7 @@
           <button class="add-btn" id="addSong" type="button">＋</button>
         </div>
         <ol class="rank-list" id="rankList"></ol>
-        <a class="btn btn-playlist" id="playlistBtn" href="#" target="_blank" rel="noopener">🎵 Sumala a la playlist del DJ</a>
-        <p class="note">Va a haber DJ. Tus sugerencias se guardan en este dispositivo; para que lleguen a la cabina, sumalas también a la playlist oficial ↑</p>
+        <p class="note">Va a haber DJ 🎧. Dejá tu tema y votá los que no pueden faltar — se los acercamos a la cabina.</p>
       </div>
     </div>
   </section>
@@ -587,7 +586,6 @@
   var FORM_URL = "";        // link a tu Google Form de confirmación (si lo cargás, el botón abre el form)
   var WPP_PHONE = "";       // ej: "5491122334455" (país+área, sin + ni espacios)
   var WPP_TEXT  = "¡Hola! Confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
-  var PLAYLIST_URL = "";    // link a la playlist colaborativa de Spotify
   var LOCATION_TXT = "Juan Bautista Alberdi 415, Olivos, Buenos Aires";
 
   /* MÚSICA DE FONDO: archivo de audio (MP3/OGG) embebido como "data:audio/..."
@@ -645,13 +643,11 @@
   startAuto();
 
   /* ================= LINKS ================= */
-  var mapBtn=document.getElementById("mapBtn"), wppBtn=document.getElementById("wppBtn"), plBtn=document.getElementById("playlistBtn");
+  var mapBtn=document.getElementById("mapBtn"), wppBtn=document.getElementById("wppBtn");
   if (MAPS_URL) mapBtn.href = MAPS_URL;
   if (FORM_URL) { wppBtn.href = FORM_URL; wppBtn.textContent = "Confirmar asistencia →"; }
   else if (WPP_PHONE) { wppBtn.href = "https://wa.me/"+WPP_PHONE+"?text="+encodeURIComponent(WPP_TEXT); }
   else wppBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el link del formulario (o el WhatsApp) para confirmar."); });
-  if (PLAYLIST_URL) plBtn.href = PLAYLIST_URL;
-  else plBtn.addEventListener("click", function(e){ e.preventDefault(); alert("Falta cargar el link de la playlist (Spotify colaborativa o WhatsApp)."); });
 
   /* ================= COUNTDOWN ================= */
   function pad(n){ return (n<10?"0":"")+n; }
