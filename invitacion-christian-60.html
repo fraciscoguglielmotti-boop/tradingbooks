@@ -300,7 +300,8 @@
   .dots button[aria-current="true"] { background: var(--cream); transform: scale(1.5); }
 
   .pax-list { display: grid; gap: 10px; }
-  .pax { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,.03); border: 1px solid rgba(233,227,211,.10); border-left: 3px solid var(--steel); border-radius: 12px; padding: 15px 16px; }
+  .pax { display: flex; gap: 14px; align-items: center; background: rgba(255,255,255,.03); border: 1px solid rgba(233,227,211,.10); border-left: 3px solid var(--steel); border-radius: 12px; padding: 15px 16px; }
+  .pax .stamp { flex: 0 0 auto; }
   .pax .stamp { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; color: var(--steel-2); border: 1.5px solid rgba(138,166,191,.6); border-radius: 6px; padding: 4px 6px; transform: rotate(-6deg); white-space: nowrap; }
   .pax h3 { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .02em; font-size: 18px; color: #ece7d8; margin: 0; }
   .pax p { margin: 4px 0 0; color: #a7b8c9; font-size: 14px; }
@@ -487,7 +488,7 @@
   <!-- ===== CARRUSEL ===== -->
   <section class="block">
     <div class="wrap reveal">
-      <div class="sec-head"><p class="eyebrow">Pasajero frecuente</p><h2>El festejado</h2><div class="rule"></div></div>
+      <div class="sec-head"><p class="eyebrow">Pasajero frecuente</p><h2>El cumpleañero</h2><div class="rule"></div></div>
       <div class="carousel" id="carousel" aria-roledescription="carrusel" aria-label="Fotos de Christian">
         <div class="track" id="track"></div>
         <button class="nav prev" id="prev" aria-label="Anterior">‹</button>
@@ -556,7 +557,6 @@
 
   <footer>
     <div class="fbar"></div>
-    <p class="chant">“Racing, Racing querido,<br>hoy te vengo a saludar…”</p>
     <small>CHRISTIAN · 60 AÑOS · RC60 · AVELLANEDA</small>
   </footer>
 
