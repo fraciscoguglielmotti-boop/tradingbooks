@@ -138,7 +138,7 @@
   .env-pass .ep-dest { font-family: var(--f-mono); font-size: 10px; letter-spacing:.12em; color: var(--ink-soft); margin-top: 4px; }
   .env-pass .ep-bar { position: static; margin-top: 9px; width: 108px; height: 15px;
     background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px); }
-  .env-pass .ep-badge { position:absolute; right:12px; top:12px; width:86px; height:86px; opacity:.9; }
+  .env-pass .ep-badge { position:absolute; right:10px; top:12px; width:90px; height:90px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; }
   .env-pass .ep-globe { position:absolute; right:62px; bottom:8px; width:56px; height:56px; opacity:.45; }
 
   /* cinta cruzada (crema con rayas diagonales) */
@@ -234,7 +234,7 @@
   .value { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .03em; font-weight: 700; color: var(--ink); }
 
   .bp-main { padding: 18px 20px 16px; position: relative; }
-  .bp-stamp { position:absolute; right:14px; top:6px; width:84px; height:84px; opacity:.68; transform: rotate(-7deg); pointer-events:none; z-index:0; }
+  .bp-stamp { position:absolute; right:12px; top:4px; width:96px; height:96px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; pointer-events:none; z-index:0; }
   .bp-pax { margin-bottom: 14px; }
   .bp-pax .value { font-size: clamp(28px,8.4vw,38px); line-height: 1; }
   .bp-dest { font-family: var(--f-mono); font-size: 10px; letter-spacing:.12em; color: var(--ink-soft); margin-top: 6px; }
@@ -417,8 +417,7 @@
         <div class="ep-name">Christian</div>
         <div class="ep-dest">DESTINO · MIS 60</div>
         <div class="ep-bar"></div>
-        <svg class="ep-globe globe"><use href="#sym-globe"/></svg>
-        <svg class="ep-badge rstamp"><use href="#sym-rstamp"/></svg>
+        <img class="ep-badge" src="img/sello.png" alt="Sello Racing · Academia · 1966" onerror="this.style.display='none'">
       </div>
       <div class="env-postmark globe"><svg viewBox="0 0 60 34" width="60" height="34"><path d="M2 8 Q15 0 30 8 T58 8 M2 17 Q15 9 30 17 T58 17 M2 26 Q15 18 30 26 T58 26" fill="none" stroke="rgba(233,227,211,.6)" stroke-width="1.4"/></svg></div>
       <div class="env-slashes"></div>
@@ -452,7 +451,7 @@
         <div class="flight">VUELO RC60</div>
       </div>
       <div class="bp-main">
-        <svg class="bp-stamp rstamp"><use href="#sym-rstamp"/></svg>
+        <img class="bp-stamp" src="img/sello.png" alt="Sello Racing · Academia · 1966" onerror="this.style.display='none'">
         <div class="bp-pax">
           <div class="label">Pasajero / Passenger</div>
           <div class="value">Christian</div>
