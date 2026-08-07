@@ -350,6 +350,20 @@
   .btn-wpp { color: #062a12; background: linear-gradient(180deg, #7ee2a0, var(--grass)); border-radius: 11px; }
   .btn-share { margin-top: 10px; color: var(--ink); background: transparent; border: 1px solid rgba(29,58,90,.3); border-radius: 11px; }
 
+  .rsvp { display: grid; gap: 14px; text-align: left; margin-bottom: 12px; }
+  .rsvp .fld { display: grid; gap: 6px; }
+  .rsvp .fld > span { font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .rsvp input[type=text], .rsvp input[type=number] { width: 100%; background: #fbf8f0; border: 1px solid var(--cream-edge); border-radius: 10px; padding: 12px 13px; color: var(--ink); font-size: 15px; font-family: var(--f-body); }
+  .rsvp input::placeholder { color: #98917f; }
+  .rsvp input:focus { outline: 2px solid var(--ink); outline-offset: 0; }
+  .rsvp .seg { display: flex; gap: 8px; }
+  .rsvp .seg label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; background: var(--cream-2); border: 1px solid var(--cream-edge); border-radius: 10px; padding: 11px; font-size: 14px; color: var(--ink); cursor: pointer; }
+  .rsvp .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .rsvp .chips label { display: flex; align-items: center; gap: 7px; background: var(--cream-2); border: 1px solid var(--cream-edge); border-radius: 10px; padding: 10px 11px; font-size: 13.5px; color: var(--ink); cursor: pointer; }
+  .rsvp .seg input, .rsvp .chips input { accent-color: var(--ink); width: 16px; height: 16px; }
+  .rsvp-done { color: #14431f; font-weight: 600; background: #d8ecd8; border: 1px solid #7fbf8f; border-radius: 10px; padding: 14px; margin: 0 0 12px; text-align: center; }
+  .rsvp-err { color: #7a1c1c; font-size: 13px; margin: 8px 0; text-align: center; }
+
   footer { text-align: center; padding: 30px 0 50px; color: var(--steel); }
   footer .chant { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .12em; font-size: 14px; color: var(--steel-2); line-height: 1.6; margin: 0 0 12px; }
   footer .fbar { width: 150px; height: 32px; margin: 0 auto 8px; opacity: .4; background-image: repeating-linear-gradient(90deg, var(--steel) 0 2px, transparent 2px 5px, var(--steel) 5px 6px, transparent 6px 10px); }
@@ -562,8 +576,33 @@
         <div class="tk-band"><div class="brand"><b>Check-in · Puerta RC60</b></div></div>
         <div class="body">
           <h2>Confirmá tu embarque</h2>
-          <p>Contanos que venís y cuántos son — parejas y familia, ¡todos bienvenidos a bordo!</p>
-          <a class="btn btn-wpp" href="#" id="wppBtn" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+          <p>Dejanos tus datos y te esperamos a bordo. Parejas y familia, ¡todos bienvenidos!</p>
+          <form id="rsvpForm" class="rsvp">
+            <label class="fld"><span>Nombre</span><input id="rsvpName" type="text" placeholder="Tu nombre" autocomplete="name"></label>
+            <div class="fld"><span>¿Venís?</span>
+              <div class="seg">
+                <label><input type="radio" name="asiste" value="Sí" checked> Sí, ahí estoy</label>
+                <label><input type="radio" name="asiste" value="No"> No puedo</label>
+              </div>
+            </div>
+            <label class="fld"><span>¿Cuántos van? (contándote)</span><input id="rsvpCount" type="number" min="1" max="20" value="1"></label>
+            <div class="fld"><span>Restricciones alimenticias</span>
+              <div class="chips" id="rsvpDiet">
+                <label><input type="checkbox" value="Vegetariano"> Vegetariano</label>
+                <label><input type="checkbox" value="Vegano"> Vegano</label>
+                <label><input type="checkbox" value="Celíaco / sin TACC"> Celíaco</label>
+                <label><input type="checkbox" value="Sin lactosa"> Sin lactosa</label>
+              </div>
+              <input id="rsvpDietTxt" type="text" placeholder="Otra / aclaración (opcional)">
+            </div>
+            <label class="fld"><span>Mensaje para Christian (opcional)</span><input id="rsvpMsg" type="text" placeholder="Dejá tu saludo…"></label>
+            <button class="btn btn-wpp" type="submit" id="rsvpSubmit">Confirmar asistencia</button>
+          </form>
+          <p class="rsvp-done" id="rsvpDone" hidden></p>
+          <div id="rsvpFallback" hidden>
+            <p class="rsvp-err">No se pudo enviar. Probá por WhatsApp:</p>
+            <a class="btn btn-wpp" href="#" id="wppBtn" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+          </div>
           <button class="btn btn-share" id="shareBtn" type="button">Compartir la invitación</button>
         </div>
       </div>
@@ -694,6 +733,39 @@
     var data={ title:"Cumple 60 de Christian", text:"¡Estás invitado al cumple de 60 de Christian! 🎉✈️⚽", url:location.href };
     if (navigator.share) navigator.share(data).catch(function(){});
     else window.open("https://wa.me/?text="+encodeURIComponent(data.text+" "+location.href), "_blank");
+  });
+
+  /* ================= RSVP (POST al servidor del VPS) ================= */
+  var RSVP_ENDPOINT = "/rsvp";
+  var rsvpForm = document.getElementById("rsvpForm");
+  var rsvpName = document.getElementById("rsvpName");
+  if (GUEST && rsvpName && !rsvpName.value) rsvpName.value = GUEST;
+  if (rsvpForm) rsvpForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    var btn = document.getElementById("rsvpSubmit");
+    var dieta = Array.prototype.map.call(document.querySelectorAll("#rsvpDiet input:checked"), function(c){ return c.value; });
+    var asisteEl = document.querySelector('input[name="asiste"]:checked');
+    var payload = {
+      nombre: (rsvpName.value || GUEST || "").trim(),
+      asiste: asisteEl ? asisteEl.value : "Sí",
+      personas: parseInt(document.getElementById("rsvpCount").value, 10) || 1,
+      dieta: dieta,
+      dieta_texto: document.getElementById("rsvpDietTxt").value.trim(),
+      mensaje: document.getElementById("rsvpMsg").value.trim()
+    };
+    if (!payload.nombre) { rsvpName.focus(); return; }
+    btn.disabled = true; btn.textContent = "Enviando…";
+    fetch(RSVP_ENDPOINT, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error("http"); return r.json(); })
+      .then(function(j){ if(!j || !j.ok) throw new Error("nok");
+        rsvpForm.hidden = true;
+        var d = document.getElementById("rsvpDone");
+        d.textContent = payload.asiste.toLowerCase().charAt(0) === "s"
+          ? "¡Listo, " + payload.nombre + "! Te esperamos a bordo ✈️🎉"
+          : "¡Gracias por avisar, " + payload.nombre + "! Te vamos a extrañar 💙";
+        d.hidden = false;
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = "Confirmar asistencia"; document.getElementById("rsvpFallback").hidden = false; });
   });
 
   /* ================= MÚSICA DE FONDO ================= */
