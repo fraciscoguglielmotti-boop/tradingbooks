@@ -356,8 +356,10 @@
   .rsvp input[type=text], .rsvp input[type=number] { width: 100%; background: #fbf8f0; border: 1px solid var(--cream-edge); border-radius: 10px; padding: 12px 13px; color: var(--ink); font-size: 15px; font-family: var(--f-body); }
   .rsvp input::placeholder { color: #98917f; }
   .rsvp input:focus { outline: 2px solid var(--ink); outline-offset: 0; }
-  .rsvp input.locked { background: var(--cream-2); font-weight: 700; cursor: default; -moz-appearance: textfield; appearance: textfield; }
-  .rsvp input.locked::-webkit-inner-spin-button, .rsvp input.locked::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .count-seg { display: flex; gap: 8px; flex-wrap: wrap; }
+  .count-seg button { flex: 1 1 auto; min-width: 46px; background: var(--cream-2); border: 1px solid var(--cream-edge); border-radius: 10px; padding: 12px 0; font-family: var(--f-cond); font-weight: 700; font-size: 18px; color: var(--ink); cursor: pointer; transition: background .12s, color .12s; }
+  .count-seg button.on { background: linear-gradient(180deg,#2f4f70,#213b58); color: #efe9db; border-color: transparent; }
+  .count-seg button.locked { flex: 1 1 100%; cursor: default; font-size: 16px; letter-spacing: .04em; }
   .rsvp .seg { display: flex; gap: 8px; }
   .rsvp .seg label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; background: var(--cream-2); border: 1px solid var(--cream-edge); border-radius: 10px; padding: 11px; font-size: 14px; color: var(--ink); cursor: pointer; }
   .rsvp .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
@@ -587,7 +589,10 @@
                 <label><input type="radio" name="asiste" value="No"> No puedo</label>
               </div>
             </div>
-            <label class="fld"><span id="countLabel">¿Cuántos van? (contándote)</span><input id="rsvpCount" type="number" min="1" max="20" value="1"></label>
+            <div class="fld"><span id="countLabel">¿Cuántos van? (contándote)</span>
+              <div class="count-seg" id="countSeg" role="group" aria-label="Cantidad de personas"></div>
+              <input type="hidden" id="rsvpCount" value="1">
+            </div>
             <div class="fld"><span>Restricciones alimenticias</span>
               <div class="chips" id="rsvpDiet">
                 <label><input type="checkbox" value="Vegetariano"> Vegetariano</label>
@@ -652,12 +657,26 @@
     if (_g) { _g.textContent = "Hola " + GUEST + " 👋 " + (PLURAL ? "¡Están a bordo!" : "¡Estás a bordo!"); _g.hidden = false; }
     WPP_TEXT = "¡Hola! " + (PLURAL ? "Somos " : "Soy ") + GUEST + ", confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
   }
-  if (CUPOS >= 1 && CUPOS <= 50) {
-    var _c = document.getElementById("rsvpCount");
-    if (_c) { _c.value = CUPOS; _c.min = CUPOS; _c.max = CUPOS; _c.readOnly = true; _c.classList.add("locked"); }
-    var _cl = document.getElementById("countLabel");
-    if (_cl) _cl.textContent = (CUPOS === 1 ? "Tu lugar (reservado)" : "Lugares reservados para ustedes: " + CUPOS);
-  }
+  (function(){
+    var seg = document.getElementById("countSeg"), hidden = document.getElementById("rsvpCount"), _cl = document.getElementById("countLabel");
+    if (!seg || !hidden) return;
+    var fixed = (CUPOS >= 1 && CUPOS <= 20);
+    var max = fixed ? CUPOS : 5;
+    var sel = fixed ? CUPOS : 1;
+    for (var i = 1; i <= max; i++) {
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.setAttribute("data-n", String(i)); btn.textContent = String(i);
+      if (i === sel) btn.className = "on";
+      seg.appendChild(btn);
+    }
+    hidden.value = String(sel);
+    seg.addEventListener("click", function(e){
+      var b = e.target.closest("button[data-n]"); if (!b) return;
+      var bs = seg.querySelectorAll("button"); for (var k = 0; k < bs.length; k++) bs[k].classList.remove("on");
+      b.classList.add("on"); hidden.value = b.getAttribute("data-n");
+    });
+    if (fixed && _cl) _cl.textContent = (CUPOS === 1 ? "Tu lugar (reservado)" : "Lugares reservados (hasta " + CUPOS + ")");
+  })();
 
   /* ================= SOBRE ================= */
   var scene = document.getElementById("envScene");
