@@ -643,10 +643,11 @@
   /* ========= SALUDO PERSONALIZADO (?p=Nombre en la URL) ========= */
   var _params = new URLSearchParams(location.search);
   var GUEST = (_params.get("p") || _params.get("para") || "").trim().slice(0,60);
+  var PLURAL = _params.get("g") === "1" || /\sy\s|famil|flia/i.test(GUEST);
   if (GUEST) {
     var _g = document.getElementById("greet");
-    if (_g) { _g.textContent = "Hola " + GUEST + " 👋 ¡Estás a bordo!"; _g.hidden = false; }
-    WPP_TEXT = "¡Hola! Soy " + GUEST + ", confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
+    if (_g) { _g.textContent = "Hola " + GUEST + " 👋 " + (PLURAL ? "¡Están a bordo!" : "¡Estás a bordo!"); _g.hidden = false; }
+    WPP_TEXT = "¡Hola! " + (PLURAL ? "Somos " : "Soy ") + GUEST + ", confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
   }
 
   /* ================= SOBRE ================= */
@@ -761,8 +762,8 @@
         rsvpForm.hidden = true;
         var d = document.getElementById("rsvpDone");
         d.textContent = payload.asiste.toLowerCase().charAt(0) === "s"
-          ? "¡Listo, " + payload.nombre + "! Te esperamos a bordo ✈️🎉"
-          : "¡Gracias por avisar, " + payload.nombre + "! Te vamos a extrañar 💙";
+          ? "¡Listo, " + payload.nombre + "! " + (PLURAL ? "Los" : "Te") + " esperamos a bordo ✈️🎉"
+          : "¡Gracias por avisar, " + payload.nombre + "! " + (PLURAL ? "Los" : "Te") + " vamos a extrañar 💙";
         d.hidden = false;
       })
       .catch(function(){ btn.disabled = false; btn.textContent = "Confirmar asistencia"; document.getElementById("rsvpFallback").hidden = false; });
