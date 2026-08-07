@@ -356,6 +356,8 @@
   .rsvp input[type=text], .rsvp input[type=number] { width: 100%; background: #fbf8f0; border: 1px solid var(--cream-edge); border-radius: 10px; padding: 12px 13px; color: var(--ink); font-size: 15px; font-family: var(--f-body); }
   .rsvp input::placeholder { color: #98917f; }
   .rsvp input:focus { outline: 2px solid var(--ink); outline-offset: 0; }
+  .rsvp input.locked { background: var(--cream-2); font-weight: 700; cursor: default; -moz-appearance: textfield; appearance: textfield; }
+  .rsvp input.locked::-webkit-inner-spin-button, .rsvp input.locked::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   .rsvp .seg { display: flex; gap: 8px; }
   .rsvp .seg label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; background: var(--cream-2); border: 1px solid var(--cream-edge); border-radius: 10px; padding: 11px; font-size: 14px; color: var(--ink); cursor: pointer; }
   .rsvp .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
@@ -585,7 +587,7 @@
                 <label><input type="radio" name="asiste" value="No"> No puedo</label>
               </div>
             </div>
-            <label class="fld"><span>¿Cuántos van? (contándote)</span><input id="rsvpCount" type="number" min="1" max="20" value="1"></label>
+            <label class="fld"><span id="countLabel">¿Cuántos van? (contándote)</span><input id="rsvpCount" type="number" min="1" max="20" value="1"></label>
             <div class="fld"><span>Restricciones alimenticias</span>
               <div class="chips" id="rsvpDiet">
                 <label><input type="checkbox" value="Vegetariano"> Vegetariano</label>
@@ -643,11 +645,18 @@
   /* ========= SALUDO PERSONALIZADO (?p=Nombre en la URL) ========= */
   var _params = new URLSearchParams(location.search);
   var GUEST = (_params.get("p") || _params.get("para") || "").trim().slice(0,60);
-  var PLURAL = _params.get("g") === "1" || /\sy\s|famil|flia/i.test(GUEST);
+  var CUPOS = parseInt(_params.get("n"), 10);
+  var PLURAL = _params.get("g") === "1" || (CUPOS >= 2) || /\sy\s|famil|flia/i.test(GUEST);
   if (GUEST) {
     var _g = document.getElementById("greet");
     if (_g) { _g.textContent = "Hola " + GUEST + " 👋 " + (PLURAL ? "¡Están a bordo!" : "¡Estás a bordo!"); _g.hidden = false; }
     WPP_TEXT = "¡Hola! " + (PLURAL ? "Somos " : "Soy ") + GUEST + ", confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
+  }
+  if (CUPOS >= 1 && CUPOS <= 50) {
+    var _c = document.getElementById("rsvpCount");
+    if (_c) { _c.value = CUPOS; _c.min = CUPOS; _c.max = CUPOS; _c.readOnly = true; _c.classList.add("locked"); }
+    var _cl = document.getElementById("countLabel");
+    if (_cl) _cl.textContent = (CUPOS === 1 ? "Tu lugar (reservado)" : "Lugares reservados para ustedes: " + CUPOS);
   }
 
   /* ================= SOBRE ================= */
