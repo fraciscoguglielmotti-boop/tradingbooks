@@ -71,6 +71,7 @@
     color: #eee7d6;
     text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.4);
   }
+  .top-title .tt-greet { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .06em; font-size: clamp(14px,4.6vw,19px); color: var(--steel-2); margin: 14px 0 0; }
 
   /* =========================================================
      SOBRE — correo aéreo vintage (pantalla de apertura)
@@ -422,6 +423,7 @@
   <div class="wrap top-title">
     <p class="tt-eyebrow">✈ Racing Airlines · Vuelo RC60</p>
     <h1 class="tt">Mis 60</h1>
+    <p class="tt-greet" id="greet" hidden></p>
   </div>
 
   <!-- ===== PASE DE ABORDAR (hero) ===== -->
@@ -598,6 +600,15 @@
   var PHOTOS = [
     // { src:"img/1.jpg", cap:"Christian y la celeste" },
   ];
+
+  /* ========= SALUDO PERSONALIZADO (?p=Nombre en la URL) ========= */
+  var _params = new URLSearchParams(location.search);
+  var GUEST = (_params.get("p") || _params.get("para") || "").trim().slice(0,60);
+  if (GUEST) {
+    var _g = document.getElementById("greet");
+    if (_g) { _g.textContent = "Hola " + GUEST + " 👋 ¡Estás a bordo!"; _g.hidden = false; }
+    WPP_TEXT = "¡Hola! Soy " + GUEST + ", confirmo asistencia al cumple de 60 de Christian 🎉\nSomos ___ persona(s):\n- ";
+  }
 
   /* ================= SOBRE ================= */
   var scene = document.getElementById("envScene");
