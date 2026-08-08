@@ -72,6 +72,8 @@
     text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.4);
   }
   .top-title .tt-greet { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .06em; font-size: clamp(14px,4.6vw,19px); color: var(--steel-2); margin: 14px 0 0; }
+  .plane-wrap { text-align: center; margin: 6px 0 -34px; position: relative; z-index: 6; pointer-events: none; }
+  .hero-plane { width: min(82%, 320px); height: auto; display: inline-block; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
 
   /* =========================================================
      SOBRE — correo aéreo vintage (pantalla de apertura)
@@ -133,7 +135,7 @@
   .env-pass .ep-head { display:flex; align-items:center; justify-content:space-between; }
   .env-pass .ep-head b { font-family: var(--f-mono); font-size: 11px; letter-spacing:.18em; color: var(--ink); }
   .env-pass .ep-head .pl { color: var(--ink); font-size: 13px; }
-  .env-pass .ep-rule { height:1px; background: rgba(29,58,90,.35); margin: 8px 0 9px; }
+  .env-pass .ep-rule { height:1px; width: 54%; background: rgba(29,58,90,.35); margin: 8px 0 9px; }
   .env-pass .ep-name { font-family: var(--f-cond); text-transform: uppercase; letter-spacing:.04em; font-size: 26px; font-weight: 700; color: var(--ink); line-height:.95; }
   .env-pass .ep-dest { font-family: var(--f-mono); font-size: 10px; letter-spacing:.12em; color: var(--ink-soft); margin-top: 4px; }
   .env-pass .ep-bar { position: static; margin-top: 9px; width: 108px; height: 15px;
@@ -234,7 +236,7 @@
   .value { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .03em; font-weight: 700; color: var(--ink); }
 
   .bp-main { padding: 18px 20px 16px; position: relative; }
-  .bp-stamp { position:absolute; right:12px; top:4px; width:96px; height:96px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; pointer-events:none; z-index:0; }
+  .bp-stamp { position:absolute; right:8px; top:2px; width:120px; height:120px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; pointer-events:none; z-index:0; }
   .bp-pax { margin-bottom: 14px; }
   .bp-pax .value { font-size: clamp(28px,8.4vw,38px); line-height: 1; }
   .bp-dest { font-family: var(--f-mono); font-size: 10px; letter-spacing:.12em; color: var(--ink-soft); margin-top: 6px; }
@@ -258,9 +260,9 @@
   .perf .hole { position: absolute; top: 50%; width: 26px; height: 26px; border-radius: 50%; background: var(--notch); transform: translateY(-50%); }
   .perf .hole.l { left: -13px; } .perf .hole.r { right: -13px; }
 
-  .bp-stub { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 4px 20px 20px; }
-  .bp-stub .fields { display: grid; gap: 9px; }
-  .bp-stub .fields .value { font-size: 15px; }
+  .bp-stub { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 16px 20px 22px; }
+  .bp-stub .bp-note { flex: 1; margin: 0; }
+  .bp-stub .bc { flex: 0 0 auto; }
   .barcode { width: 108px; height: 54px; align-self: center;
     background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 10px, var(--ink) 10px 13px, transparent 13px 15px, var(--ink) 15px 16px, transparent 16px 21px);
     background-size: 21px 100%; }
@@ -443,8 +445,10 @@
     <p class="tt-greet" id="greet" hidden></p>
   </div>
 
+  <div class="wrap plane-wrap"><img class="hero-plane" src="img/avion.png" alt="" onerror="this.style.display='none'"></div>
+
   <!-- ===== PASE DE ABORDAR (hero) ===== -->
-  <header class="wrap" style="padding-top:10px">
+  <header class="wrap" style="padding-top:0">
     <div class="ticket reveal in">
       <div class="tk-band">
         <div class="brand"><b>Boarding Pass</b><span class="pl">✈</span></div>
@@ -455,13 +459,13 @@
         <div class="bp-pax">
           <div class="label">Pasajero / Passenger</div>
           <div class="value">Christian</div>
-          <div class="bp-dest">DESTINO · MIS 60 · YACHT CLUB OLIVOS</div>
+          <div class="bp-dest">DESTINO · MIS 60</div>
         </div>
 
         <div class="bp-route">
-          <div class="pt"><div class="code">1966</div><div class="sub">Nació crack</div></div>
+          <div class="pt"><div class="code">1966</div></div>
           <div class="bp-path"><div class="line"></div><div class="plane">✈</div></div>
-          <div class="pt"><div class="code">60</div><div class="sub">Cumple años</div></div>
+          <div class="pt"><div class="code">60</div></div>
         </div>
 
         <div class="bp-grid">
@@ -471,19 +475,15 @@
           <div class="cell"><div class="label">Embarque / Boarding</div><div class="value">20:30 hs</div></div>
         </div>
 
-        <p class="bp-note"><b>Christian Cumple 60.</b> Se ruega puntualidad para el vuelo más importante del año. Estás convocado a bordo. Equipaje: Buena onda.</p>
       </div>
 
       <div class="perf"><span class="hole l"></span><span class="hole r"></span></div>
 
       <div class="bp-stub">
-        <div class="fields">
-          <div><div class="label">Pasajero</div><div class="value">Christian · 60</div></div>
-          <div><div class="label">Vuelo · Fecha</div><div class="value">RC60 · 02/10/26</div></div>
-        </div>
-        <div>
+        <p class="bp-note"><b>Christian Cumple 60.</b> Se ruega puntualidad para el vuelo más importante del año. Estás convocado a bordo. Equipaje: Buena onda.</p>
+        <div class="bc">
           <div class="barcode"></div>
-          <div class="barcode-lab">RC · 60 · AVELLANEDA</div>
+          <div class="barcode-lab">RC · 60 · CHRISTIAN</div>
         </div>
       </div>
     </div>
@@ -543,22 +543,6 @@
     </div>
   </section>
 
-  <!-- ===== MÚSICA A BORDO ===== -->
-  <section class="block jukebox">
-    <div class="wrap reveal">
-      <div class="sec-head"><p class="eyebrow">La previa la armamos entre todos</p><h2>Música a bordo</h2><div class="rule"></div></div>
-      <div class="ticket">
-        <div class="form-row">
-          <input id="songName" type="text" maxlength="18" placeholder="Tu nombre" aria-label="Tu nombre" />
-          <input id="songInput" type="text" maxlength="60" placeholder="Un tema que no puede faltar…" aria-label="Canción" />
-          <button class="add-btn" id="addSong" type="button">＋</button>
-        </div>
-        <ol class="rank-list" id="rankList"></ol>
-        <p class="note">Va a haber DJ 🎧. Dejá tu tema y votá los que no pueden faltar — se los acercamos a la cabina.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== DUTY FREE ===== -->
   <section class="block">
     <div class="wrap reveal">
@@ -566,7 +550,6 @@
       <div class="wish">
         <div class="item"><div class="em">🐐</div><div class="tx"><b>Un saludo de Messi</b><span>Cosa fina, nomás. Si es en video, mejor.</span></div></div>
         <div class="item"><div class="em">🇦🇷</div><div class="tx"><b>Un saludo de Lautaro Martínez</b><span>Que le mande un abrazo y un gol dedicado.</span></div></div>
-        <div class="item"><div class="em">🏆</div><div class="tx"><b>Una Libertadores para Racing</b><span>El sueño eterno. Aceptamos aportes a la causa.</span></div></div>
       </div>
       <p class="wish-note">* Estamos gestionando estos regalos. Mientras tanto, tu presencia ya vale la Copa.</p>
     </div>
@@ -733,28 +716,6 @@
   function tick(){ var diff=EVENT.getTime()-Date.now(); if(diff<=0){ dEl.textContent="0"; hEl.textContent=mEl.textContent=sEl.textContent="00"; return; }
     var s=Math.floor(diff/1000); dEl.textContent=Math.floor(s/86400); hEl.textContent=pad(Math.floor(s%86400/3600)); mEl.textContent=pad(Math.floor(s%3600/60)); sEl.textContent=pad(s%60); }
   tick(); setInterval(tick,1000);
-
-  /* ================= RANKING DE TEMAS ================= */
-  var KEY="cumple60-christian-songs-v1", VKEY="cumple60-christian-voted-v1";
-  var seed=[{id:"s1",t:"Racing te quiero (Los del Cilindro)",by:"La barra",v:9},{id:"s2",t:"La Mosca — Para No Verte Más",by:"Fer",v:7},{id:"s3",t:"Rodrigo — Soy Cordobés",by:"Beto",v:6},{id:"s4",t:"Los Palmeras — Bombón Asesino",by:"Sole",v:5}];
-  var songs, voted;
-  try { songs = JSON.parse(localStorage.getItem(KEY)) || seed.slice(); } catch(e){ songs = seed.slice(); }
-  try { voted = JSON.parse(localStorage.getItem(VKEY)) || {}; } catch(e){ voted = {}; }
-  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(songs)); localStorage.setItem(VKEY,JSON.stringify(voted)); }catch(e){} }
-  var listEl=document.getElementById("rankList");
-  function paint(){ songs.sort(function(a,b){return b.v-a.v;}); listEl.innerHTML="";
-    songs.forEach(function(s,i){ var li=document.createElement("li"); li.className="rank-item"+(i<3?" top":"");
-      var medal=i===0?"🥇":i===1?"🥈":i===2?"🥉":(i+1);
-      li.innerHTML='<div class="pos">'+medal+'</div><div class="info"><b></b><span></span></div><button class="vote"'+(voted[s.id]?" disabled":"")+'><span>▲</span><span class="n">'+s.v+'</span></button>';
-      li.querySelector("b").textContent=s.t; li.querySelector(".info span").textContent=s.by?("sugerida por "+s.by):"";
-      li.querySelector(".vote").addEventListener("click", function(){ if(voted[s.id])return; s.v++; voted[s.id]=1; save(); paint(); });
-      listEl.appendChild(li); });
-  }
-  paint();
-  var nameEl=document.getElementById("songName"), inEl=document.getElementById("songInput");
-  function addSong(){ var t=(inEl.value||"").trim(); if(!t){ inEl.focus(); return; } var by=(nameEl.value||"").trim(); var id="u"+Date.now(); songs.push({id:id,t:t,by:by,v:1}); voted[id]=1; save(); inEl.value=""; paint(); }
-  document.getElementById("addSong").addEventListener("click", addSong);
-  inEl.addEventListener("keydown", function(e){ if(e.key==="Enter") addSong(); });
 
   /* ================= COMPARTIR ================= */
   document.getElementById("shareBtn").addEventListener("click", function(){
