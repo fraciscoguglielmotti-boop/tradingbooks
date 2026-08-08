@@ -714,19 +714,25 @@
   }
   scene.addEventListener("click", openEnv);
 
-  /* ======= CARTEL "BAJÁ PARA VER TODO" ======= */
+  /* ======= CARTEL "BAJÁ PARA VER TODO" (persistente hasta el final) ======= */
   var cue = document.getElementById("scrollCue");
-  function hideScrollCue(){ if (cue) cue.classList.add("hide"); }
+  function updateCue(){
+    if (!cue || cue.hidden) return;
+    // sólo se esconde cuando la persona ya casi llegó al final (para no tapar el formulario)
+    var docH = document.documentElement.scrollHeight;
+    var nearBottom = (window.innerHeight + window.scrollY) >= (docH - 420);
+    cue.classList.toggle("hide", nearBottom);
+  }
   function showScrollCue(){
     if (!cue) return;
     cue.hidden = false;
-    // ocultar apenas la persona empieza a bajar
-    window.addEventListener("scroll", function(){ if (window.scrollY > 80) hideScrollCue(); }, { passive: true });
-    // si no bajan en 12s, igual lo dejamos visible rebotando; por las dudas nunca lo escondemos solo
+    window.addEventListener("scroll", updateCue, { passive: true });
+    window.addEventListener("resize", updateCue);
+    updateCue();
   }
+  // cada toque baja una pantalla más (para quien no sabe scrollear); sigue visible hasta el final
   if (cue) cue.addEventListener("click", function(){
-    hideScrollCue();
-    window.scrollTo({ top: Math.round(window.innerHeight * 0.82), behavior: "smooth" });
+    window.scrollBy({ top: Math.round(window.innerHeight * 0.82), behavior: "smooth" });
   });
   scene.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openEnv(); } });
 
