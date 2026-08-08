@@ -72,7 +72,7 @@
     text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.4);
   }
   .top-title .tt-greet { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .06em; font-size: clamp(14px,4.6vw,19px); color: var(--steel-2); margin: 14px 0 0; }
-  .plane-wrap { text-align: center; margin: 6px 0 -34px; position: relative; z-index: 6; pointer-events: none; }
+  .plane-wrap { text-align: center; margin: 6px auto -34px; position: relative; z-index: 6; pointer-events: none; }
   .hero-plane { width: min(82%, 320px); height: auto; display: inline-block; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
 
   /* =========================================================
@@ -140,7 +140,7 @@
   .env-pass .ep-dest { font-family: var(--f-mono); font-size: 10px; letter-spacing:.12em; color: var(--ink-soft); margin-top: 4px; }
   .env-pass .ep-bar { position: static; margin-top: 9px; width: 108px; height: 15px;
     background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px); }
-  .env-pass .ep-badge { position:absolute; right:10px; top:12px; width:90px; height:90px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; }
+  .env-pass .ep-badge { position:absolute; right:12px; top:50%; transform:translateY(-50%); width:92px; height:92px; opacity:.95; object-fit:contain; mix-blend-mode:multiply; }
   .env-pass .ep-globe { position:absolute; right:62px; bottom:8px; width:56px; height:56px; opacity:.45; }
 
   /* cinta cruzada (crema con rayas diagonales) */
@@ -546,10 +546,10 @@
   <!-- ===== DUTY FREE ===== -->
   <section class="block">
     <div class="wrap reveal">
-      <div class="sec-head"><p class="eyebrow">Duty free</p><h2>Lista del capitán</h2><div class="rule"></div></div>
+      <div class="sec-head"><p class="eyebrow">Duty Free · Regalos</p><h2>Lista del capitán</h2><div class="rule"></div></div>
       <div class="wish">
         <div class="item"><div class="em">🐐</div><div class="tx"><b>Un saludo de Messi</b><span>Cosa fina, nomás. Si es en video, mejor.</span></div></div>
-        <div class="item"><div class="em">🇦🇷</div><div class="tx"><b>Un saludo de Lautaro Martínez</b><span>Que le mande un abrazo y un gol dedicado.</span></div></div>
+        <div class="item"><div class="em">🐂</div><div class="tx"><b>Un saludo de Lautaro Martínez</b><span>Que le mande un abrazo y un gol dedicado.</span></div></div>
       </div>
       <p class="wish-note">* Estamos gestionando estos regalos. Mientras tanto, tu presencia ya vale la Copa.</p>
     </div>
@@ -562,7 +562,7 @@
         <div class="tk-band"><div class="brand"><b>Check-in · Puerta RC60</b></div></div>
         <div class="body">
           <h2>Confirmá tu embarque</h2>
-          <p>Dejanos tus datos y te esperamos a bordo. Parejas y familia, ¡todos bienvenidos!</p>
+          <p>No te olvides de hacer el check-in. Asegurá tu lugar confirmando tu asistencia a bordo.</p>
           <form id="rsvpForm" class="rsvp">
             <label class="fld"><span>Nombre</span><input id="rsvpName" type="text" placeholder="Tu nombre" autocomplete="name"></label>
             <div class="fld"><span>¿Venís?</span>
