@@ -601,7 +601,6 @@
             <p class="rsvp-err">No se pudo enviar. Probá por WhatsApp:</p>
             <a class="btn btn-wpp" href="#" id="wppBtn" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
           </div>
-          <button class="btn btn-share" id="shareBtn" type="button">Compartir la invitación</button>
         </div>
       </div>
     </div>
@@ -729,13 +728,6 @@
   function tick(){ var diff=EVENT.getTime()-Date.now(); if(diff<=0){ dEl.textContent="0"; hEl.textContent=mEl.textContent=sEl.textContent="00"; return; }
     var s=Math.floor(diff/1000); dEl.textContent=Math.floor(s/86400); hEl.textContent=pad(Math.floor(s%86400/3600)); mEl.textContent=pad(Math.floor(s%3600/60)); sEl.textContent=pad(s%60); }
   tick(); setInterval(tick,1000);
-
-  /* ================= COMPARTIR ================= */
-  document.getElementById("shareBtn").addEventListener("click", function(){
-    var data={ title:"Cumple 60 de Christian", text:"¡Estás invitado al cumple de 60 de Christian! 🎉✈️⚽", url:location.href };
-    if (navigator.share) navigator.share(data).catch(function(){});
-    else window.open("https://wa.me/?text="+encodeURIComponent(data.text+" "+location.href), "_blank");
-  });
 
   /* ================= RSVP (POST al servidor del VPS) ================= */
   var RSVP_ENDPOINT = "/rsvp";
