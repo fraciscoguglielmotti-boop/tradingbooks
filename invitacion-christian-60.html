@@ -72,6 +72,29 @@
   }
   .bgm-toggle:focus-visible { outline: 2px solid var(--steel-2); outline-offset: 3px; }
 
+  /* Cartel "bajá para ver todo" (ayuda a los que no scrollean) */
+  .scroll-cue {
+    position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(0);
+    z-index: 58; display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 22px; border-radius: 999px; cursor: pointer;
+    border: 1px solid rgba(233,227,211,.4);
+    background: linear-gradient(180deg, #34567a, #1b3450);
+    color: #f2ecde; font-family: var(--f-cond); text-transform: uppercase;
+    letter-spacing: .1em; font-size: 15px; font-weight: 700; white-space: nowrap;
+    box-shadow: 0 12px 26px rgba(0,0,0,.5);
+    animation: cueBounce 1.5s ease-in-out infinite;
+    transition: opacity .45s ease, visibility .45s ease;
+  }
+  .scroll-cue .chev { font-size: 17px; line-height: 1; }
+  .scroll-cue[hidden] { display: none; }
+  .scroll-cue.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+  .scroll-cue:focus-visible { outline: 2px solid var(--steel-2); outline-offset: 3px; }
+  @keyframes cueBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%     { transform: translateX(-50%) translateY(7px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; } }
+
   .top-title { text-align: center; padding: 32px 18px 4px; }
   .top-title .tt-eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--steel); margin: 0 0 12px; }
   .top-title .tt {
@@ -446,6 +469,7 @@
 <!-- ================= INVITACIÓN ================= -->
 <audio id="bgm" loop preload="auto"></audio>
 <button id="bgmToggle" class="bgm-toggle" aria-label="Silenciar música" hidden>🔊</button>
+<button id="scrollCue" class="scroll-cue" aria-label="Bajá para ver toda la invitación" hidden><span>Bajá para ver todo</span><span class="chev">↓</span></button>
 
 <div class="stage" id="stage">
   <canvas id="papelitos" aria-hidden="true"></canvas>
@@ -686,9 +710,24 @@
     var t1 = reduce ? 150 : 1500;
     var t2 = reduce ? 400 : 2300;
     setTimeout(function(){ scene.classList.add("done"); }, t1);
-    setTimeout(function(){ scene.style.display = "none"; document.body.classList.remove("locked"); }, t2);
+    setTimeout(function(){ scene.style.display = "none"; document.body.classList.remove("locked"); showScrollCue(); }, t2);
   }
   scene.addEventListener("click", openEnv);
+
+  /* ======= CARTEL "BAJÁ PARA VER TODO" ======= */
+  var cue = document.getElementById("scrollCue");
+  function hideScrollCue(){ if (cue) cue.classList.add("hide"); }
+  function showScrollCue(){
+    if (!cue) return;
+    cue.hidden = false;
+    // ocultar apenas la persona empieza a bajar
+    window.addEventListener("scroll", function(){ if (window.scrollY > 80) hideScrollCue(); }, { passive: true });
+    // si no bajan en 12s, igual lo dejamos visible rebotando; por las dudas nunca lo escondemos solo
+  }
+  if (cue) cue.addEventListener("click", function(){
+    hideScrollCue();
+    window.scrollTo({ top: Math.round(window.innerHeight * 0.82), behavior: "smooth" });
+  });
   scene.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openEnv(); } });
 
   /* ================= CARRUSEL ================= */
