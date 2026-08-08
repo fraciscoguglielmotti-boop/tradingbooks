@@ -79,7 +79,7 @@
     text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.4);
   }
   .top-title .tt-greet { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .06em; font-size: clamp(15px,5vw,21px); color: var(--steel-2); margin: 0 0 10px; }
-  .plane-wrap { text-align: center; margin: -18px auto -36px; position: relative; z-index: 6; pointer-events: none; }
+  .plane-wrap { text-align: center; margin: -18px auto 14px; position: relative; z-index: 6; pointer-events: none; }
   .hero-plane { width: min(90%, 360px); height: auto; display: inline-block; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
 
   /* =========================================================
@@ -699,20 +699,21 @@
       : '<div class="ph"><div class="cam">📷</div><b>Foto '+s.ph+'</b><small>próximamente</small></div>';
     track.appendChild(el);
     var d = document.createElement("button"); d.setAttribute("aria-label","Ir a la foto "+(i+1));
-    d.addEventListener("click", function(){ go(i); stopAuto(); }); dotsBox.appendChild(d);
+    d.addEventListener("click", function(){ go(i); restartAuto(); }); dotsBox.appendChild(d);
   });
   var idx = 0, count = slides.length;
   function render(){ track.style.transform = "translateX("+(-idx*100)+"%)"; dotsBox.querySelectorAll("button").forEach(function(b,i){ b.setAttribute("aria-current", i===idx?"true":"false"); }); }
   function go(i){ idx=(i+count)%count; render(); }
-  document.getElementById("prev").addEventListener("click", function(){ go(idx-1); stopAuto(); });
-  document.getElementById("next").addEventListener("click", function(){ go(idx+1); stopAuto(); });
+  document.getElementById("prev").addEventListener("click", function(){ go(idx-1); restartAuto(); });
+  document.getElementById("next").addEventListener("click", function(){ go(idx+1); restartAuto(); });
   render();
   var x0=null;
   track.addEventListener("touchstart", function(e){ x0=e.touches[0].clientX; }, {passive:true});
-  track.addEventListener("touchend", function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){ go(idx+(dx<0?1:-1)); stopAuto(); } x0=null; });
+  track.addEventListener("touchend", function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){ go(idx+(dx<0?1:-1)); restartAuto(); } x0=null; });
   var auto=null;
-  function startAuto(){ if(!reduce && count>1){ auto=setInterval(function(){ go(idx+1); },4500); } }
+  function startAuto(){ if(count>1 && !auto){ auto=setInterval(function(){ go(idx+1); },4500); } }
   function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
+  function restartAuto(){ stopAuto(); startAuto(); }
   startAuto();
 
   /* ================= LINKS ================= */
