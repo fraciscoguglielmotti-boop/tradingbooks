@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e2338">
+<title>Christian · Mis 60 · Boarding Pass</title>
 <style>
   /* ============================================================
      CHRISTIAN · 60 — "BOARDING PASS × EL CILINDRO"
@@ -72,8 +79,8 @@
     text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 10px 30px rgba(0,0,0,.4);
   }
   .top-title .tt-greet { font-family: var(--f-cond); text-transform: uppercase; letter-spacing: .06em; font-size: clamp(14px,4.6vw,19px); color: var(--steel-2); margin: 14px 0 0; }
-  .plane-wrap { text-align: center; margin: 6px auto -34px; position: relative; z-index: 6; pointer-events: none; }
-  .hero-plane { width: min(82%, 320px); height: auto; display: inline-block; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
+  .plane-wrap { text-align: center; margin: -8px auto -18px; position: relative; z-index: 6; pointer-events: none; }
+  .hero-plane { width: min(52%, 190px); height: auto; display: inline-block; filter: drop-shadow(0 12px 18px rgba(0,0,0,.5)); }
 
   /* =========================================================
      SOBRE — correo aéreo vintage (pantalla de apertura)
@@ -383,6 +390,8 @@
     .seal,.env-hint,.bp-path .plane{animation:none!important}
   }
 </style>
+</head>
+<body>
 
 <!-- SVG defs reutilizables: globo + sello redondo -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -538,7 +547,7 @@
       <div class="pax-list">
         <div class="pax"><div class="stamp">RACING</div><div><h3>Hincha de la Academia</h3><p>Celeste y blanco hasta la médula. En las buenas, en las malas y en las peores.</p></div></div>
         <div class="pax"><div class="stamp">✈ MILLAS</div><div><h3>Viajero de tiempo completo</h3><p>Kilómetros recorridos: incontables. La valija siempre lista. Próximo destino: sus 60.</p></div></div>
-        <div class="pax"><div class="stamp">ASADO</div><div><h3>DT del asado</h3><p>Le encanta comerlo… prenderlo no tanto. Dirige la parrilla desde el banco, con una fresca en la mano.</p></div></div>
+        <div class="pax"><div class="stamp">ASADO</div><div><h3>DT del asado</h3><p>Le encanta comerlo, prenderlo no tanto. Últimamente se hizo muy amigo de la Plancheta.</p></div></div>
       </div>
     </div>
   </section>
@@ -803,3 +812,5 @@
   document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
 })();
 </script>
+</body>
+</html>
