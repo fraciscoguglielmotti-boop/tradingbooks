@@ -54,16 +54,30 @@ def to_csv(rows):
 
 def admin_html(rows, key):
     e = html.escape
-    si = [r for r in rows if str(r.get("asiste","")).lower().startswith("s")]
-    no = [r for r in rows if str(r.get("asiste","")).lower().startswith("n")]
+    def _norm(n): return " ".join(str(n).strip().lower().split())
+    # Los totales cuentan UNA sola vez por persona (la última confirmación pisa a las
+    # anteriores). Se conservan y muestran TODOS los mensajes en la tabla de abajo.
+    latest_idx = {}
+    for i, r in enumerate(rows):
+        nm = _norm(r.get("nombre",""))
+        if nm:
+            latest_idx[nm] = i
+    unicos = [rows[i] for i in latest_idx.values()]
+    si = [r for r in unicos if str(r.get("asiste","")).lower().startswith("s")]
+    no = [r for r in unicos if str(r.get("asiste","")).lower().startswith("n")]
     cabezas = sum(int(r.get("personas") or 0) for r in si)
+    dups = len(rows) - len(unicos)
     trs = ""
-    for r in reversed(rows):
+    for i, r in reversed(list(enumerate(rows))):
+        nm = _norm(r.get("nombre",""))
+        es_dup = bool(nm) and latest_idx.get(nm) != i
         viene = str(r.get("asiste","")).lower().startswith("s")
         color = "#1c7a3f" if viene else "#a12b2b"
-        trs += ("<tr>"
+        rstyle = " style='opacity:.45'" if es_dup else ""
+        tag = " <span style='color:#8aa6bf;font-size:11px'>(repetido · no suma)</span>" if es_dup else ""
+        trs += (f"<tr{rstyle}>"
                 f"<td>{e(str(r.get('ts','')))}</td>"
-                f"<td><b>{e(str(r.get('nombre','')))}</b></td>"
+                f"<td><b>{e(str(r.get('nombre','')))}</b>{tag}</td>"
                 f"<td style='color:{color};font-weight:700'>{e(str(r.get('asiste','')))}</td>"
                 f"<td style='text-align:center'>{e(str(r.get('personas','')))}</td>"
                 f"<td>{e(' / '.join(r.get('dieta',[])))}{' · ' + e(str(r.get('dieta_texto',''))) if r.get('dieta_texto') else ''}</td>"
@@ -84,11 +98,12 @@ def admin_html(rows, key):
  a.btn{{display:inline-block;margin-bottom:16px;background:#2f4f70;color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:14px}}
 </style></head><body>
 <h1>✈ RSVP · Cumple 60 de Christian</h1>
-<p class=sub>Actualizá la página para ver las últimas confirmaciones.</p>
+<p class=sub>Actualizá la página para ver las últimas confirmaciones. Los totales cuentan cada persona una sola vez (si alguien confirmó más de una vez, vale la última). Los mensajes repetidos se conservan abajo, en gris.</p>
 <div class=cards>
   <div class=card><div class=n>{len(si)}</div><div class=l>Confirmaron</div></div>
   <div class=card><div class=n>{cabezas}</div><div class=l>Personas (total)</div></div>
   <div class=card><div class=n>{len(no)}</div><div class=l>No pueden</div></div>
+  <div class=card><div class=n>{dups}</div><div class=l>Envíos repetidos</div></div>
 </div>
 <a class=btn href="/admin.csv?key={e(key)}">⬇ Descargar CSV</a>
 <table><tr><th>Fecha</th><th>Nombre</th><th>Viene</th><th>Pers.</th><th>Restricciones</th><th>Mensaje</th></tr>
